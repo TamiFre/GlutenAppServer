@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace GlutenAppServer.Controllers
 {
     [Route("api/[controller]")]
@@ -18,5 +19,60 @@ namespace GlutenAppServer.Controllers
             this.context = context;
             this.webHostEnvironment = env;
         }
+
+        //למשתמש רגיל בלי מנהל מסעדה
+        [HttpPost("Register")]
+        public IActionResult Register([FromBody] DTO.UsersDTO userDTO)
+        {
+            try
+            {
+                //לעשות לוג אאוט לקודמים
+                HttpContext.Session.Clear();
+
+                //יצירת יוזר חדש
+                Models.User newUser = new User()
+                {
+                    UserName = userDTO.Name,
+                    UserPass = userDTO.Password,
+                    TypeId = userDTO.TypeID
+                };
+
+                //הוספת היוזר
+                context.Users.Add(newUser);
+                context.SaveChanges();
+
+                DTO.UsersDTO dtoUser = new DTO.UsersDTO(newUser);
+                return Ok(dtoUser);
+            }
+
+            catch (Exception ex)
+            {
+                //אם לא הצלחתי לרשום
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        //פעולת לוגין לכל המשתמשים
+        //[HttpPost("Login")]
+        //public IActionResult Login([FromBody] DTO.UsersDTO userDTO)
+        //{
+        //    try
+        //    {
+        //        //להעיף קודמים
+        //        HttpContext.Session.Clear();
+
+
+        //    }
+        //    catch (Exception ex) 
+        //    {
+
+        //    }
+        //}
+
+
+
+
+
     }
 }
