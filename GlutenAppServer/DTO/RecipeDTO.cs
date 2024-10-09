@@ -6,5 +6,7 @@
         public int RecipeID { get; set; }
         public int UserID { get; set; }
 
+        //צריך בונה
+
     }
 }
