@@ -17,7 +17,7 @@ namespace GlutenAppServer
 
             //Add Database to dependency injection
             builder.Services.AddDbContext<GlutenFree_DB_Context>(
-                    options => options.UseSqlServer( "Server = (localdb)\\MSSQLLocalDB;Initial Catalog=GlutenFree_DB;User ID=AppAdminLogin;Password=Tami; Trusted_Connection = True; MultipleActiveResultSets = true"));
+                    options => options.UseSqlServer( "Server = (localdb)\\MSSQLLocalDB;Initial Catalog=GlutenFree_DB;User ID=AppAdminLogin;Password=Tami; Trusted_Connection = True, MultipleActiveResultSets = true"));
 
 
 
@@ -64,7 +64,6 @@ namespace GlutenAppServer
 
             // Configure the HTTP request pipeline.
 
-            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
