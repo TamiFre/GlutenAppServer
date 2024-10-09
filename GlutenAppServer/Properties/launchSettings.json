@@ -13,7 +13,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "GlutenAppServerAPIController",
       "applicationUrl": "http://localhost:5199",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
