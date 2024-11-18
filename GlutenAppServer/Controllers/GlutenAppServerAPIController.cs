@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GlutenAppServer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class GlutenAppServerAPIController : ControllerBase
     {
@@ -53,22 +53,7 @@ namespace GlutenAppServer.Controllers
 
         }
 
-        //פעולת לוגין לכל המשתמשים
-        //[HttpPost("Login")]
-        //public IActionResult Login([FromBody] DTO.UsersDTO userDTO)
-        //{
-        //    try
-        //    {
-        //        //להעיף קודמים
-        //        HttpContext.Session.Clear();
-
-
-        //    }
-        //    catch (Exception ex) 
-        //    {
-
-        //    }
-        //}
+        
 
     }
 }

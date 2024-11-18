@@ -103,7 +103,7 @@ INSERT INTO Recipes VALUES ('lalalala', 1)                  --gal's recipe
 INSERT INTO Critics VALUES ('I love this restaurant', 1,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
 INSERT INTO Information VALUES ('Gluten is tasty - Shahar Shalgi')  --shahar's information - will be deleted
 
-SELECT * FROM Recipes
+SELECT * FROM Users
 
 --EF Code
 /*

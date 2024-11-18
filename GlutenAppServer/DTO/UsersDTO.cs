@@ -16,6 +16,7 @@
             this.Name = modelUser.UserName;
             this.Password = modelUser.UserPass;
             this.TypeID = modelUser.TypeId;
+            this.UserID=modelUser.UserId;
         }
 
 
