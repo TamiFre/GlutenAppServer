@@ -20,6 +20,10 @@ namespace GlutenAppServer.Controllers
             this.webHostEnvironment = env;
         }
 
+
+        //FIRST ETERATION
+
+
         //למשתמש רגיל בלי מנהל מסעדה
         [HttpPost("RegisterRegular")]
         public IActionResult RegisterRegular([FromBody] DTO.UsersDTO userDTO)
@@ -52,6 +56,46 @@ namespace GlutenAppServer.Controllers
             }
 
         }
+
+
+
+
+
+        //לוגין 
+        [HttpPost("Login")]
+        public IActionResult Login([FromBody] DTO.UsersDTO loginDto)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+                //Get model user class from DB with matching password
+                Models.User? modelsUser = context.GetUser(loginDto.Password);
+
+                //Check if user exist for this password match, if not return Access Denied (Error 403) 
+                if (modelsUser == null || modelsUser.UserPass != loginDto.Password)
+                {
+                    return Unauthorized();
+                }
+
+                //Login suceed! now mark login in session memory!
+                HttpContext.Session.SetString("loggedInUser", modelsUser.UserName);
+
+                DTO.UsersDTO dtoUser = new DTO.UsersDTO(modelsUser);
+
+                return Ok(dtoUser);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+
+        //
+        //NEXT ETERATION - SECOND ONE
+        //
 
         [HttpPost("RegisterManager")]
         public IActionResult RegisterManager([FromBody] DTO.UsersDTO userDTO)
@@ -93,36 +137,7 @@ namespace GlutenAppServer.Controllers
         }
 
 
-        //לוגין 
-        [HttpPost("Login")]
-        public IActionResult Login([FromBody] DTO.UsersDTO loginDto)
-        {
-            try
-            {
-                HttpContext.Session.Clear(); //Logout any previous login attempt
-
-                //Get model user class from DB with matching password
-                Models.User? modelsUser = context.GetUser(loginDto.Password);
-
-                //Check if user exist for this password match, if not return Access Denied (Error 403) 
-                if (modelsUser == null || modelsUser.UserPass != loginDto.Password)
-                {
-                    return Unauthorized();
-                }
-
-                //Login suceed! now mark login in session memory!
-                HttpContext.Session.SetString("loggedInUser", modelsUser.UserName);
-
-                DTO.UsersDTO dtoUser = new DTO.UsersDTO(modelsUser);
-                
-                return Ok(dtoUser);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-        }
+        
 
 
 
