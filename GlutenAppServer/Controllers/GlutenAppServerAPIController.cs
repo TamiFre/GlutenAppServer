@@ -93,6 +93,30 @@ namespace GlutenAppServer.Controllers
         }
 
 
+        //Add Fact to database
+        [HttpPost("AddFact")]
+        public IActionResult AddFact([FromBody] DTO.InformationDTO informationDTO)
+        {
+            try
+            {
+                //יצירת אינפו חדש
+                Models.Information newInfo = new Information()
+                {
+                    //the id will be identity
+                    InfoText = informationDTO.InfoText
+                };
+                context.Information.Add(newInfo);
+                context.SaveChanges();
+                return Ok(newInfo);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
         //
         //NEXT ETERATION - SECOND ONE
         //
