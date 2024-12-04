@@ -18,6 +18,13 @@ public partial class Recipe
     [Column("UserID")]
     public int? UserId { get; set; }
 
+    [Column("StatusID")]
+    public int? StatusId { get; set; }
+
+    [ForeignKey("StatusId")]
+    [InverseProperty("Recipes")]
+    public virtual Status? Status { get; set; }
+
     [ForeignKey("UserId")]
     [InverseProperty("Recipes")]
     public virtual User? User { get; set; }

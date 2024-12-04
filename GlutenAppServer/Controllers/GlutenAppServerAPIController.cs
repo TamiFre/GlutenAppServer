@@ -122,7 +122,7 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
-
+                return null;
             }
             catch(Exception ex)
             {
@@ -137,7 +137,7 @@ namespace GlutenAppServer.Controllers
 
         #region register manager restaurant
         [HttpPost("RegisterManager")]
-        public IActionResult RegisterManager([FromBody] DTO.UsersDTO userDTO)
+        public IActionResult RegisterManager([FromBody] DTO.ManagerDTO managerDTO)
         {
             try
             {
@@ -145,27 +145,30 @@ namespace GlutenAppServer.Controllers
                 HttpContext.Session.Clear();
 
                 //יצירת יוזר חדש
-                Models.User newUser = new User()
+                Models.User user = new User()
                 {
-                    UserName = userDTO.Name,
-                    UserPass = userDTO.Password,
-                    TypeId = userDTO.TypeID
+                    UserName = managerDTO.UserManager.UserName,
+                    UserPass = managerDTO.UserManager.UserPass,
+                    TypeId = managerDTO.UserManager.TypeId,
+                };
+
+                //יצירת מסעדה חדשה
+                Models.Restaurant restaurant = new Restaurant()
+                {
+                    RestAddress = managerDTO.RestaurantManager.RestAddress,
+                    UserId = managerDTO.UserManager.UserId,
+                    TypeFoodId = managerDTO.RestaurantManager.TypeFoodId,
+                    StatusId = 2,
                 };
 
                 //הוספת היוזר
-                context.Users.Add(newUser);
+                context.Users.Add(user);
+                //הוספת מסעדה
+                context.Restaurants.Add(restaurant);
                 context.SaveChanges();
 
-                //הוספת המסעדה במצב פנדינג
-                //
-              ///
-              ////
-                //ASK OFER
-
-
-
-                DTO.UsersDTO dtoUser = new DTO.UsersDTO(newUser);
-                return Ok(dtoUser);
+                DTO.ManagerDTO dtoManager = new DTO.ManagerDTO(user,restaurant);
+                return Ok(dtoManager);
             }
 
             catch (Exception ex)

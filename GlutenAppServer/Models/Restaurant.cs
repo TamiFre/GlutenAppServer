@@ -21,8 +21,15 @@ public partial class Restaurant
     [Column("TypeFoodID")]
     public int? TypeFoodId { get; set; }
 
+    [Column("StatusID")]
+    public int? StatusId { get; set; }
+
     [InverseProperty("Rest")]
     public virtual ICollection<Critic> Critics { get; set; } = new List<Critic>();
+
+    [ForeignKey("StatusId")]
+    [InverseProperty("Restaurants")]
+    public virtual Status? Status { get; set; }
 
     [ForeignKey("TypeFoodId")]
     [InverseProperty("Restaurants")]
