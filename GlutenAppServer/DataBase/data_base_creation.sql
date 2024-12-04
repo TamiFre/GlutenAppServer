@@ -48,8 +48,8 @@ UserID INT,
 FOREIGN KEY (UserID) REFERENCES Users(UserID), --Foreign key from users to show the restaurant manager
 TypeFoodID INT,
 FOREIGN KEY (TypeFoodID) REFERENCES TypeFood(TypeFoodID), --Foreign key from type food to show the type
-StatusDesc NVARCHAR,                                      --Foreign key - status
-FOREIGN KEY (StatusDesc) REFERENCES Statuses(StatusDesc)
+StatusID INT,                                      --Foreign key - status
+FOREIGN KEY (StatusID) REFERENCES Statuses(StatusID)
 );
 
 
@@ -71,8 +71,8 @@ RecipeID INT PRIMARY KEY IDENTITY,  --Primary key
 RecipeText NVARCHAR (1000),         -- The actual recipe
 UserID INT,
 FOREIGN KEY (UserID) REFERENCES Users(UserID), --Foreign key - the writer
-StatusDesc NVARCHAR,                                      --Foreign key - status
-FOREIGN KEY (StatusDesc) REFERENCES Statuses(StatusDesc)
+StatusID INT,                                      --Foreign key - status
+FOREIGN KEY (StatusID) REFERENCES Statuses(StatusID)
 );
 
 --יצירת טבלת מידע
