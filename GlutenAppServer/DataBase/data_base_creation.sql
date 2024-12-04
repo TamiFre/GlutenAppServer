@@ -19,6 +19,12 @@ TypeFoodID INT PRIMARY KEY IDENTITY,   --Primary Key
 TypeFoodName NVARCHAR (30)             --Types of food categories
 );
 
+--יצירת טבלת סטטוס
+CREATE TABLE Statuses(
+StatusID INT PRIMARY KEY,
+StatusDesc NVARCHAR (50)
+);
+
 --יצירת טבלת סוג משתמשים
 CREATE TABLE TypeUserID(
 TypeID INT PRIMARY KEY IDENTITY,       --Primary Key
@@ -41,8 +47,12 @@ RestAddress NVARCHAR (70),                     --Address
 UserID INT,
 FOREIGN KEY (UserID) REFERENCES Users(UserID), --Foreign key from users to show the restaurant manager
 TypeFoodID INT,
-FOREIGN KEY (TypeFoodID) REFERENCES TypeFood(TypeFoodID) --Foreign key from type food to show the type
+FOREIGN KEY (TypeFoodID) REFERENCES TypeFood(TypeFoodID), --Foreign key from type food to show the type
+StatusDesc NVARCHAR,                                      --Foreign key - status
+FOREIGN KEY (StatusDesc) REFERENCES Statuses(StatusDesc)
 );
+
+
 
 
 --יצירת טבלת ביקורות
@@ -60,7 +70,9 @@ CREATE TABLE Recipes(
 RecipeID INT PRIMARY KEY IDENTITY,  --Primary key
 RecipeText NVARCHAR (1000),         -- The actual recipe
 UserID INT,
-FOREIGN KEY (UserID) REFERENCES Users(UserID) --Foreign key - the writer
+FOREIGN KEY (UserID) REFERENCES Users(UserID), --Foreign key - the writer
+StatusDesc NVARCHAR,                                      --Foreign key - status
+FOREIGN KEY (StatusDesc) REFERENCES Statuses(StatusDesc)
 );
 
 --יצירת טבלת מידע
@@ -98,13 +110,13 @@ INSERT INTO TypeFood VALUES ('French')
 --הכנסת דמה לכל הטבלאות
 INSERT INTO Users VALUES ('Gal', 'GalTheBest123', 1)        --gal the first user. userid = 1, typeid = 1
 INSERT INTO Users VALUES ('Shahar', 'ShaharTheBest123', 3)  --shahar the first restaurant manager. userid = 2, typeid = 3
-INSERT INTO Users VALUES ('Tami', 'TamiFre123', 2)  --tami the admin
+INSERT INTO Users VALUES ('Tami', 'TamiFre123', 2)          --tami the admin
 INSERT INTO Restaurants VALUES ('Ramon School', 2, 1)       --shahar's restaurant - restid =1, typefood = italian
 INSERT INTO Recipes VALUES ('lalalala', 1)                  --gal's recipe
 INSERT INTO Critics VALUES ('I love this restaurant', 1,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
 INSERT INTO Information VALUES ('Gluten is tasty - Shahar Shalgi')  --shahar's information - will be deleted
 
-SELECT * FROM Information
+SELECT * FROM Recipes
 
 --EF Code
 /*

@@ -8,6 +8,13 @@
         public string RestAddress { get; set; }
         //צריך בונה
 
+        public RestaurantDTO(Models.Restaurant restUser)
+        {
+            this.RestAddress = restUser.RestAddress;
+            this.UserID = restUser.UserId;
+            this.TypeFoodID = restUser.TypeFoodId;
+            //rest id adds auto
+        }
 
     }
 }

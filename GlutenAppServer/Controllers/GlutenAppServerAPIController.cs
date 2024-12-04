@@ -23,7 +23,7 @@ namespace GlutenAppServer.Controllers
 
         //FIRST ETERATION
 
-
+        #region register regular
         //למשתמש רגיל בלי מנהל מסעדה
         [HttpPost("RegisterRegular")]
         public IActionResult RegisterRegular([FromBody] DTO.UsersDTO userDTO)
@@ -56,11 +56,9 @@ namespace GlutenAppServer.Controllers
             }
 
         }
+        #endregion
 
-
-
-
-
+        #region Login
         //לוגין 
         [HttpPost("Login")]
         public IActionResult Login([FromBody] DTO.UsersDTO loginDto)
@@ -91,9 +89,10 @@ namespace GlutenAppServer.Controllers
             }
 
         }
+        #endregion
 
-
-        //Add Fact to database
+        #region admin 
+        //Add Fact to database - admin
         [HttpPost("AddFact")]
         public IActionResult AddFact([FromBody] DTO.InformationDTO informationDTO)
         {
@@ -114,13 +113,29 @@ namespace GlutenAppServer.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        #endregion
 
+        #region Add Recipe
+        //Add Recipe to DataBase
+        [HttpPost("AddRecipe")]
+        public IActionResult AddRecipe([FromBody] DTO.RestaurantDTO restaurantDTO)
+        {
+            try
+            {
 
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
 
         //
-        //NEXT ETERATION - SECOND ONE
+        //REGISTER MANAGER
         //
 
+        #region register manager restaurant
         [HttpPost("RegisterManager")]
         public IActionResult RegisterManager([FromBody] DTO.UsersDTO userDTO)
         {
@@ -159,9 +174,9 @@ namespace GlutenAppServer.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        #endregion
 
 
-        
 
 
 
