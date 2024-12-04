@@ -111,7 +111,10 @@ INSERT INTO TypeFood VALUES ('French')
 INSERT INTO Users VALUES ('Gal', 'GalTheBest123', 1)        --gal the first user. userid = 1, typeid = 1
 INSERT INTO Users VALUES ('Shahar', 'ShaharTheBest123', 3)  --shahar the first restaurant manager. userid = 2, typeid = 3
 INSERT INTO Users VALUES ('Tami', 'TamiFre123', 2)          --tami the admin
-INSERT INTO Restaurants VALUES ('Ramon School', 2, 1)       --shahar's restaurant - restid =1, typefood = italian
+INSERT INTO Statuses VALUES (1,'Approved')
+INSERT INTO Statuses VALUES (2,'Pending')
+INSERT INTO Statuses VALUES (3,'Declined')
+INSERT INTO Restaurants VALUES ('Ramon School', 2, 1,2)       --shahar's restaurant - restid =1, typefood = italian
 INSERT INTO Recipes VALUES ('lalalala', 1)                  --gal's recipe
 INSERT INTO Critics VALUES ('I love this restaurant', 1,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
 INSERT INTO Information VALUES ('Gluten is tasty - Shahar Shalgi')  --shahar's information - will be deleted
