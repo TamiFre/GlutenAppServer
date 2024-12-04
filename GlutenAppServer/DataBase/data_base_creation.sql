@@ -125,5 +125,5 @@ SELECT * FROM Recipes
 /*
 scaffold-DbContext "Server = (localdb)\MSSQLLocalDB;Initial Catalog=MyAppName_DB;User ID=TaskAdminLogin;Password=kukuPassword;" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models -Context TamiDBContext -DataAnnotations -force
 
- scaffold-DbContext "Server = (localdb)\MSSQLLocalDB;Initial Catalog=GlutenFree_DB;User ID=AppAdminLogin;Password=Tami;" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models -Context GlutenFree_DB_Context -DataAnnotations -force
+ scaffold-DbContext "Server = (localdb)\MSSQLLocalDB;Initial Catalog=GlutenFree_DB;User ID=AppAdminUser;Password=Tami;" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models -Context GlutenFree_DB_Context -DataAnnotations -force
 */
