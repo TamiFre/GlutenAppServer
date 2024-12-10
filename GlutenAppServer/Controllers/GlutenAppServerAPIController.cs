@@ -116,13 +116,26 @@ namespace GlutenAppServer.Controllers
         #endregion
 
         #region Add Recipe
+
+        //Check
+
         //Add Recipe to DataBase
         [HttpPost("AddRecipe")]
-        public IActionResult AddRecipe([FromBody] DTO.RestaurantDTO restaurantDTO)
+        public IActionResult AddRecipe([FromBody] DTO.RecipeDTO recipeDTO)
         {
             try
             {
-                return null;
+                //יצירת מתכון חדש
+                Models.Recipe newRcipe = new Recipe()
+                {
+                    //id = identity
+                    RecipeText = recipeDTO.Recipe,
+                    UserId = recipeDTO.UserID,
+                    StatusId =2
+                };
+                context.Recipes.Add(newRcipe);
+                context.SaveChanges();
+                return Ok(newRcipe);
             }
             catch(Exception ex)
             {
@@ -136,6 +149,7 @@ namespace GlutenAppServer.Controllers
         //
 
         #region register manager restaurant
+        //Check
         [HttpPost("RegisterManager")]
         public IActionResult RegisterManager([FromBody] DTO.ManagerDTO managerDTO)
         {
