@@ -1,4 +1,4 @@
-﻿namespace GlutenAppServer.DTO
+﻿    namespace GlutenAppServer.DTO
 {
     public class UsersDTO
     {

@@ -161,27 +161,34 @@ namespace GlutenAppServer.Controllers
                 //יצירת יוזר חדש
                 Models.User user = new User()
                 {
-                    UserName = managerDTO.UserManager.UserName,
-                    UserPass = managerDTO.UserManager.UserPass,
-                    TypeId = managerDTO.UserManager.TypeId,
+                    UserName = managerDTO.UserManager.Name,
+                    UserPass = managerDTO.UserManager.Password,
+                    TypeId = managerDTO.UserManager.TypeID,
+                    UserId = 0
                 };
 
                 //יצירת מסעדה חדשה
                 Models.Restaurant restaurant = new Restaurant()
                 {
                     RestAddress = managerDTO.RestaurantManager.RestAddress,
-                    UserId = managerDTO.UserManager.UserId,
-                    TypeFoodId = managerDTO.RestaurantManager.TypeFoodId,
+                    UserId = managerDTO.UserManager.UserID,
+                    TypeFoodId = managerDTO.RestaurantManager.TypeFoodID,
                     StatusId = 2,
                 };
 
                 //הוספת היוזר
                 context.Users.Add(user);
+                context.SaveChanges();
+
                 //הוספת מסעדה
+                restaurant.UserId = user.UserId;
                 context.Restaurants.Add(restaurant);
                 context.SaveChanges();
 
-                DTO.ManagerDTO dtoManager = new DTO.ManagerDTO(user,restaurant);
+                DTO.UsersDTO u = new DTO.UsersDTO(user);
+                DTO.RestaurantDTO r = new DTO.RestaurantDTO(restaurant);
+
+                DTO.ManagerDTO dtoManager = new DTO.ManagerDTO(u, r);
                 return Ok(dtoManager);
             }
 

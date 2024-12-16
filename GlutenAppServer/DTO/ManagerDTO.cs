@@ -2,13 +2,15 @@
 {
     public class ManagerDTO
     {
-       public Models.User UserManager { get; set; }
-       public Models.Restaurant RestaurantManager { get; set; } 
+       public UsersDTO UserManager { get; set; }
+       public RestaurantDTO RestaurantManager { get; set; } 
 
-        public ManagerDTO(Models.User user, Models.Restaurant rest) 
+        public ManagerDTO(UsersDTO user, RestaurantDTO rest) 
         {
             UserManager = user;
             RestaurantManager = rest;
         }
+
+        public ManagerDTO() { }
     }
 }
