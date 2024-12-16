@@ -126,7 +126,7 @@ INSERT INTO Restaurants VALUES ('another rest 1',2,1,2)
 INSERT INTO Restaurants VALUES ('another rest 2',2,1,2)
 INSERT INTO Restaurants VALUES ('another rest 3',2,1,2)
 
-SELECT * FROM Restaurants
+SELECT * FROM Users
 
 --EF Code
 /*
