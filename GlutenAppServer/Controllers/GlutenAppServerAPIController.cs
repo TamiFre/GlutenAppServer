@@ -1,4 +1,5 @@
-﻿using GlutenAppServer.Models;
+﻿using GlutenAppServer.DTO;
+using GlutenAppServer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -98,6 +99,12 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
+                string? userName = HttpContext.Session.GetString("loggedInUser");
+                if (string.IsNullOrEmpty(userName))
+                {
+                    return Unauthorized("User is not logged in");
+                }
+
                 //יצירת אינפו חדש
                 Models.Information newInfo = new Information()
                 {
@@ -200,7 +207,39 @@ namespace GlutenAppServer.Controllers
         }
         #endregion
 
+        #region Get restaurants
+        //get restaurants by status
+        [HttpGet("GetRestByStatus")]
+        public IActionResult GetRestByStatus([FromQuery] int statusID)
+        {
+            try
+            {
+                List<Models.Restaurant> listRestaurant = context.GetAllRestByStatus(statusID);
+                return Ok(listRestaurant);
+            }
+            catch (Exception ex) 
+            {
+                return BadRequest(ex.Message);  
+            } 
+            
+        }
 
+        //get all restaurants
+        [HttpGet("GetAllRests")]
+        public IActionResult GetAllRest()
+        {
+            try
+            {
+                List<Models.Restaurant> listRestaurants = context.GetAllRestaurants();
+                return Ok(listRestaurants);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+        }
+        #endregion
 
 
 
