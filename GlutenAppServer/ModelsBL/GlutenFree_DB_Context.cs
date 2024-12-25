@@ -19,6 +19,16 @@ namespace GlutenAppServer.Models
         {
             return this.Restaurants.ToList();
         }
-       
+        //get recipe by status
+        public List<Recipe>? GetAllRecipeByStatus(int i)
+        {
+            return this.Recipes.Where(u=> u.StatusId==i).ToList();
+        }
+        //get all recipes
+        public List<Recipe>? GetAllRecipes()
+        {
+            return this.Recipes.ToList();   
+        }
+
     }
 }

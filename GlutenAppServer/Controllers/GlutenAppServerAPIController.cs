@@ -241,7 +241,37 @@ namespace GlutenAppServer.Controllers
         }
         #endregion
 
+        #region Get Recipes
+        //get recipe by status
+        [HttpGet("GetRecipeByStatus")]
+        public IActionResult GetRecipeByStatus([FromQuery] int i)
+        {
+            try
+            {
+                List<Models.Recipe> listRecipe = context.GetAllRecipeByStatus(i);
+                return Ok(listRecipe);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
+        //get all recipes 
+        [HttpGet("GetAllRecipes")]
+        public IActionResult GetAllRecipes()
+        {
+            try
+            {
+                List<Models.Recipe> listRecipe = context.GetAllRecipes();
+                return Ok(listRecipe);
+            }
+            catch (Exception ex) 
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
 
     }
 }

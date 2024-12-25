@@ -122,13 +122,16 @@ INSERT INTO Information VALUES ('Gluten is tasty - Shahar Shalgi')  --shahar's i
 INSERT INTO Recipes VALUES ('lalalalalalalallala 1',1,2)
 INSERT INTO Recipes VALUES ('lalalalalalalallala 2',1,2)
 INSERT INTO Recipes VALUES ('lalalalalalalallala 3',1,2)
+INSERT INTO Recipes VALUES ('lalalalalalalallala 4',1,3)
+INSERT INTO Recipes VALUES ('lalalalalalalallala 5',1,1)
 INSERT INTO Restaurants VALUES ('another rest 1',2,1,2)
 INSERT INTO Restaurants VALUES ('another rest 2',2,1,2)
 INSERT INTO Restaurants VALUES ('another rest 3',2,1,2)
 INSERT INTO Restaurants VALUES ('another rest 4',2,1,1)
 INSERT INTO Restaurants VALUES ('another rest 5',2,1,3)
 
-SELECT * FROM Restaurants
+SELECT * FROM Recipes
+SELECT * FROM Statuses
 
 --EF Code
 /*
