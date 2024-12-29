@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GlutenAppServer.DTO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace GlutenAppServer.Models
 {
@@ -30,5 +32,17 @@ namespace GlutenAppServer.Models
             return this.Recipes.ToList();   
         }
 
+        public void SetStatusRestToApproved(Restaurant restaurant)
+        {
+            var okay = this.Restaurants.Where(r => r.RestAddress == restaurant.RestAddress).FirstOrDefault();
+            if (okay != null)
+            {
+                // Update the StatusID property of the found restaurant
+                restaurant.StatusId = 1;
+
+            }
+          
+
+        }
     }
 }

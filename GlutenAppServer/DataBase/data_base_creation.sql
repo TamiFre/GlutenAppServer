@@ -132,6 +132,8 @@ INSERT INTO Restaurants VALUES ('another rest 5',2,1,3)
 
 SELECT * FROM Recipes
 SELECT * FROM Statuses
+SELECT * FROM Restaurants
+
 
 --EF Code
 /*

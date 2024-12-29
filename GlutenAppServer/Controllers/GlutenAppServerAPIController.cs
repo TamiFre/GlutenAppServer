@@ -138,13 +138,13 @@ namespace GlutenAppServer.Controllers
                     //id = identity
                     RecipeText = recipeDTO.Recipe,
                     UserId = recipeDTO.UserID,
-                    StatusId =2
+                    StatusId = 2
                 };
                 context.Recipes.Add(newRcipe);
                 context.SaveChanges();
                 return Ok(newRcipe);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -217,11 +217,11 @@ namespace GlutenAppServer.Controllers
                 List<Models.Restaurant> listRestaurant = context.GetAllRestByStatus(statusID);
                 return Ok(listRestaurant);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                return BadRequest(ex.Message);  
-            } 
-            
+                return BadRequest(ex.Message);
+            }
+
         }
 
         //get all restaurants
@@ -237,7 +237,7 @@ namespace GlutenAppServer.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            
+
         }
         #endregion
 
@@ -266,12 +266,45 @@ namespace GlutenAppServer.Controllers
                 List<Models.Recipe> listRecipe = context.GetAllRecipes();
                 return Ok(listRecipe);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
         #endregion
 
+        //for some reason it wont save the data in the data base even tho it does change it
+
+        #region Change status
+        //change the status of the restaurant
+        [HttpPost("ChangeRestStatusToApprove")]
+        public IActionResult ChangeRestStatusToApprove(DTO.RestaurantDTO restaurantDTO)
+        {
+            try
+            {
+                Models.Restaurant newRest = new Restaurant()
+                {
+                    RestAddress = restaurantDTO.RestAddress,
+                    UserId = restaurantDTO.UserID,
+                    TypeFoodId = restaurantDTO.TypeFoodID,
+                    StatusId = restaurantDTO.StatusID,
+                    RestId=restaurantDTO.RestID
+                };
+
+                context.SetStatusRestToApproved(newRest);
+
+                context.SaveChanges();
+                return Ok(restaurantDTO);
+                
+
+                
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
     }
 }
+
