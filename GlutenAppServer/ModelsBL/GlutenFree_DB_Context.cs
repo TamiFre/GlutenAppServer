@@ -31,6 +31,11 @@ namespace GlutenAppServer.Models
         {
             return this.Recipes.ToList();   
         }
+        //get all approved recipes
+        public List<Recipe>? GetAllApprovedRecipes()
+        {
+            return this.Recipes.Where(r => r.StatusId == 1).ToList();
+        }
 
         public void SetStatusRestToApproved(Restaurant restaurant)
         {
@@ -39,11 +44,7 @@ namespace GlutenAppServer.Models
             {
                 // Update the StatusID property of the found restaurant
                 restaurant.StatusId = 1;
-
-
             }
-          
-
         }
     }
 }

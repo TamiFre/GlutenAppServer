@@ -289,9 +289,24 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
-                
                 List<Models.Recipe> listRecipe = context.GetAllRecipes();
                 return Ok(listRecipe);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Get All Approved Recipes
+        [HttpGet("GetAllApprovedRecipes")]
+        public IActionResult GetAllApprovedRecipes()
+        {
+            try
+            {
+                List<Models.Recipe> listApprovedRecipe = context.GetAllApprovedRecipes();
+                return Ok(listApprovedRecipe);
             }
             catch (Exception ex)
             {
