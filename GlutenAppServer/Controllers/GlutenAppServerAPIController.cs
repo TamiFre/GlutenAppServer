@@ -21,6 +21,7 @@ namespace GlutenAppServer.Controllers
             this.webHostEnvironment = env;
         }
 
+        //Remember - validate the user is logged in in all the places needed
 
         //FIRST ETERATION
 
@@ -99,11 +100,13 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
-                string? userName = HttpContext.Session.GetString("loggedInUser");
-                if (string.IsNullOrEmpty(userName))
-                {
-                    return Unauthorized("User is not logged in");
-                }
+                //validate its an admin
+                string? username = HttpContext.Session.GetString("loggedInUser");
+                if (username == null)
+                    return Unauthorized();
+                User? u = context.GetUser(username);
+                if (u == null || u.TypeId != 2)
+                    return Unauthorized();
 
                 //יצירת אינפו חדש
                 Models.Information newInfo = new Information()
@@ -132,6 +135,14 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
+                //validate its an admin
+                string? username = HttpContext.Session.GetString("loggedInUser");
+                if (username == null)
+                    return Unauthorized();
+                User? u = context.GetUser(username);
+                if (u == null || u.TypeId != 2)
+                    return Unauthorized();
+
                 //יצירת מתכון חדש
                 Models.Recipe newRcipe = new Recipe()
                 {
@@ -214,6 +225,13 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
+                //validate its an admin 
+                string? username = HttpContext.Session.GetString("loggedInUser");
+                if (username == null)
+                    return Unauthorized();
+                User? u = context.GetUser(username);
+                if (u == null || u.TypeId != 2)
+                    return Unauthorized();
                 List<Models.Restaurant> listRestaurant = context.GetAllRestByStatus(statusID);
                 return Ok(listRestaurant);
             }
@@ -248,6 +266,7 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
+                //validate its an admin
                 string? username = HttpContext.Session.GetString("loggedInUser");
                 if (username == null)
                     return Unauthorized();
@@ -290,13 +309,21 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
+                //validate its an admin
+                string? username = HttpContext.Session.GetString("loggedInUser");
+                if (username == null)
+                    return Unauthorized();
+                User? u = context.GetUser(username);
+                if (u == null || u.TypeId != 2)
+                    return Unauthorized();
+
                 Models.Restaurant newRest = new Restaurant()
                 {
                     RestAddress = restaurantDTO.RestAddress,
                     UserId = restaurantDTO.UserID,
                     TypeFoodId = restaurantDTO.TypeFoodID,
                     StatusId = restaurantDTO.StatusID,
-                    RestId=restaurantDTO.RestID
+                    RestId = restaurantDTO.RestID
                 };
 
                 context.SetStatusRestToApproved(newRest);
