@@ -7,9 +7,9 @@ namespace GlutenAppServer.Models
     public partial class GlutenFree_DB_Context: DbContext
     {
         //get user
-        public User? GetUser(string password)
+        public User? GetUser(string userName)
         {
-            return this.Users.Where(u => u.UserPass == password).FirstOrDefault();
+            return this.Users.Where(u => u.UserName == userName).FirstOrDefault();
         }
         //get rest by status
         public List<Restaurant>? GetAllRestByStatus(int i)

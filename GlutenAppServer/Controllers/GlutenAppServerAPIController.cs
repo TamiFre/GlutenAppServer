@@ -68,8 +68,8 @@ namespace GlutenAppServer.Controllers
             {
                 HttpContext.Session.Clear(); //Logout any previous login attempt
 
-                //Get model user class from DB with matching password
-                Models.User? modelsUser = context.GetUser(loginDto.Password);
+                //Get model user class from DB with matching user name
+                Models.User? modelsUser = context.GetUser(loginDto.Name);
 
                 //Check if user exist for this password match, if not return Access Denied (Error 403) 
                 if (modelsUser == null || modelsUser.UserPass != loginDto.Password)
@@ -244,11 +244,18 @@ namespace GlutenAppServer.Controllers
         #region Get Recipes
         //get recipe by status
         [HttpGet("GetRecipeByStatus")]
-        public IActionResult GetRecipeByStatus([FromQuery] int i)
+        public IActionResult GetRecipeByStatus([FromQuery] int statusID)
         {
             try
             {
-                List<Models.Recipe> listRecipe = context.GetAllRecipeByStatus(i);
+                string? username = HttpContext.Session.GetString("loggedInUser");
+                if (username == null)
+                    return Unauthorized();
+                User? u = context.GetUser(username);
+                if (u == null || u.TypeId != 2)
+                    return Unauthorized();
+
+                List <Models.Recipe> listRecipe = context.GetAllRecipeByStatus(statusID);
                 return Ok(listRecipe);
             }
             catch (Exception ex)
@@ -263,6 +270,7 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
+                
                 List<Models.Recipe> listRecipe = context.GetAllRecipes();
                 return Ok(listRecipe);
             }
@@ -292,12 +300,8 @@ namespace GlutenAppServer.Controllers
                 };
 
                 context.SetStatusRestToApproved(newRest);
-
                 context.SaveChanges();
-                return Ok(restaurantDTO);
-                
-
-                
+                return Ok(newRest);
             }
             catch (Exception ex)
             {
