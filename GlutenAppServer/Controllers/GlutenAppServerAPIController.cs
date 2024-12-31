@@ -135,13 +135,7 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
-                //validate its an admin
-                string? username = HttpContext.Session.GetString("loggedInUser");
-                if (username == null)
-                    return Unauthorized();
-                User? u = context.GetUser(username);
-                if (u == null || u.TypeId != 2)
-                    return Unauthorized();
+               //add user validation
 
                 //יצירת מתכון חדש
                 Models.Recipe newRcipe = new Recipe()
@@ -305,8 +299,40 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
-                List<Models.Recipe> listApprovedRecipe = context.GetAllApprovedRecipes();
+                List<Models.Recipe> listApprovedRecipe = context.GetAllApprovedRecipes();    
                 return Ok(listApprovedRecipe);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Get All Approved Restaurants
+        [HttpGet("GetAllApprovedRestaurants")]
+        public IActionResult GetAllApprovedRestaurants()
+        {
+            try
+            {
+                List<Models.Restaurant> listApprovedRestaurant = context.GetAllApprovedRastaurants();
+                return Ok(listApprovedRestaurant);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Get All Approved Restaurants By Food Type
+        [HttpGet("GetApprovedRestaurantsByChosenFoodType")]
+        public IActionResult GetApprovedRestaurantsByChosenFoodType([FromQuery] int chosenFoodType)
+        {
+            try
+            {
+                List<Models.Restaurant> listApprovedAndTypeFood = context.GetApprovedRestaurantsByChosenFoodType(chosenFoodType);
+                return Ok(listApprovedAndTypeFood);
             }
             catch (Exception ex)
             {

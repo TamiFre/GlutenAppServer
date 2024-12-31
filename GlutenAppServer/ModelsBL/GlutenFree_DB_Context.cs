@@ -36,7 +36,15 @@ namespace GlutenAppServer.Models
         {
             return this.Recipes.Where(r => r.StatusId == 1).ToList();
         }
-
+        //get all approved restaurants
+        public List<Restaurant>? GetAllApprovedRastaurants()
+        {
+            return this.Restaurants.Where(r => r.StatusId == 1).ToList();
+        }
+        public List<Restaurant>? GetApprovedRestaurantsByChosenFoodType(int chosenFoodType)
+        {
+            return this.Restaurants.Where(r => r.StatusId == 1&& r.TypeFoodId == chosenFoodType).ToList();   
+        }
         public void SetStatusRestToApproved(Restaurant restaurant)
         {
             var okay = this.Restaurants.Where(r => r.RestAddress == restaurant.RestAddress).FirstOrDefault();
