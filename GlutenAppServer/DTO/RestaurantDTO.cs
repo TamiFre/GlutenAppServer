@@ -6,6 +6,7 @@
         public int? UserID { get;  set; }
         public int? TypeFoodID { get;  set; }
         public string RestAddress { get; set; }
+        public string RestName {  get; set; }
         public int StatusID { get; set; }
         //צריך בונה
 
@@ -16,6 +17,7 @@
             this.RestAddress = restUser.RestAddress;
             this.UserID = restUser.UserId;
             this.TypeFoodID = restUser.TypeFoodId;
+            this.RestName = restUser.RestName;
             //rest id adds auto
         }
 

@@ -39,7 +39,7 @@ public partial class GlutenFree_DB_Context : DbContext
     {
         modelBuilder.Entity<Critic>(entity =>
         {
-            entity.HasKey(e => e.CriticId).HasName("PK__Critics__A19EBA85819EBDDC");
+            entity.HasKey(e => e.CriticId).HasName("PK__Critics__A19EBA85D1AA1691");
 
             entity.HasOne(d => d.Rest).WithMany(p => p.Critics).HasConstraintName("FK__Critics__RestID__32E0915F");
 
@@ -48,12 +48,12 @@ public partial class GlutenFree_DB_Context : DbContext
 
         modelBuilder.Entity<Information>(entity =>
         {
-            entity.HasKey(e => e.InfoId).HasName("PK__Informat__4DEC9D9A0CDCE07F");
+            entity.HasKey(e => e.InfoId).HasName("PK__Informat__4DEC9D9A4A159088");
         });
 
         modelBuilder.Entity<Recipe>(entity =>
         {
-            entity.HasKey(e => e.RecipeId).HasName("PK__Recipes__FDD988D0EAD96BC2");
+            entity.HasKey(e => e.RecipeId).HasName("PK__Recipes__FDD988D088913AC3");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Recipes).HasConstraintName("FK__Recipes__StatusI__36B12243");
 
@@ -62,7 +62,7 @@ public partial class GlutenFree_DB_Context : DbContext
 
         modelBuilder.Entity<Restaurant>(entity =>
         {
-            entity.HasKey(e => e.RestId).HasName("PK__Restaura__02F04D6ABE6210F5");
+            entity.HasKey(e => e.RestId).HasName("PK__Restaura__02F04D6ADF2C359B");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Restaurants).HasConstraintName("FK__Restauran__Statu__2F10007B");
 
@@ -73,24 +73,24 @@ public partial class GlutenFree_DB_Context : DbContext
 
         modelBuilder.Entity<Status>(entity =>
         {
-            entity.HasKey(e => e.StatusId).HasName("PK__Statuses__C8EE2043EABC4E7B");
+            entity.HasKey(e => e.StatusId).HasName("PK__Statuses__C8EE2043A8063791");
 
             entity.Property(e => e.StatusId).ValueGeneratedNever();
         });
 
         modelBuilder.Entity<TypeFood>(entity =>
         {
-            entity.HasKey(e => e.TypeFoodId).HasName("PK__TypeFood__D1DD6A4302462E16");
+            entity.HasKey(e => e.TypeFoodId).HasName("PK__TypeFood__D1DD6A43DCB5770B");
         });
 
         modelBuilder.Entity<TypeUserId>(entity =>
         {
-            entity.HasKey(e => e.TypeId).HasName("PK__TypeUser__516F03951BB20852");
+            entity.HasKey(e => e.TypeId).HasName("PK__TypeUser__516F03953C2D75C2");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC54777FF9");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC72DCC897");
 
             entity.HasOne(d => d.Type).WithMany(p => p.Users).HasConstraintName("FK__Users__TypeID__2A4B4B5E");
         });

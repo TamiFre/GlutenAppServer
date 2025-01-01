@@ -41,10 +41,20 @@ namespace GlutenAppServer.Models
         {
             return this.Restaurants.Where(r => r.StatusId == 1).ToList();
         }
+        //get reataurants that are approved and by their food type
         public List<Restaurant>? GetApprovedRestaurantsByChosenFoodType(int chosenFoodType)
         {
             return this.Restaurants.Where(r => r.StatusId == 1&& r.TypeFoodId == chosenFoodType).ToList();   
         }
+        //get critics for a restaurant
+        public List<Critic>? GetCriticsByRestaurant(RestaurantDTO restaurantDTO)
+        {
+            List<Critic>? critics = new List<Critic>();
+            critics = this.Critics.Where(c => c.RestId == restaurantDTO.RestID).ToList();
+            return critics;
+        }
+
+        //not working
         public void SetStatusRestToApproved(Restaurant restaurant)
         {
             var okay = this.Restaurants.Where(r => r.RestAddress == restaurant.RestAddress).FirstOrDefault();

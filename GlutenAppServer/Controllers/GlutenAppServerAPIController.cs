@@ -185,6 +185,7 @@ namespace GlutenAppServer.Controllers
                     RestAddress = managerDTO.RestaurantManager.RestAddress,
                     UserId = managerDTO.UserManager.UserID,
                     TypeFoodId = managerDTO.RestaurantManager.TypeFoodID,
+                    RestName = managerDTO.RestaurantManager.RestName,
                     StatusId = 2,
                 };
 
@@ -333,6 +334,22 @@ namespace GlutenAppServer.Controllers
             {
                 List<Models.Restaurant> listApprovedAndTypeFood = context.GetApprovedRestaurantsByChosenFoodType(chosenFoodType);
                 return Ok(listApprovedAndTypeFood);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Get All Critics Of A Restaurant
+        [HttpPost("GetCriticForRestaurant")]
+        public IActionResult GetCriticForRestaurant([FromBody] RestaurantDTO restaurantDTO)
+        {
+            try
+            {
+                List<Models.Critic> listCritics = context.GetCriticsByRestaurant(restaurantDTO);
+                return Ok(listCritics);
             }
             catch (Exception ex)
             {

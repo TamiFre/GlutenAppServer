@@ -44,6 +44,7 @@ FOREIGN KEY (TypeID) REFERENCES TypeUserId(TypeID)  --Foreign key to show user t
 CREATE TABLE Restaurants(
 RestID INT PRIMARY KEY IDENTITY,               --Primary Key
 RestAddress NVARCHAR (70),                     --Address
+RestName NVARCHAR(70),
 UserID INT,
 FOREIGN KEY (UserID) REFERENCES Users(UserID), --Foreign key from users to show the restaurant manager
 TypeFoodID INT,
@@ -114,7 +115,7 @@ INSERT INTO Users VALUES ('Tami', 'TamiFre123', 2)          --tami the admin
 INSERT INTO Statuses VALUES (1,'Approved')
 INSERT INTO Statuses VALUES (2,'Pending')
 INSERT INTO Statuses VALUES (3,'Declined')
-INSERT INTO Restaurants VALUES ('Ramon School', 2, 1,2)       --shahar's restaurant - restid =1, typefood = italian
+INSERT INTO Restaurants VALUES ('Ramon School','Ramon Rest', 2, 1,2)       --shahar's restaurant - restid =1, typefood = italian
 INSERT INTO Recipes VALUES ('lalalala', 1, 2)                  --gal's recipe
 INSERT INTO Critics VALUES ('I love this restaurant', 1,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
 INSERT INTO Information VALUES ('Gluten is tasty - Shahar Shalgi')  --shahar's information - will be deleted
@@ -124,16 +125,17 @@ INSERT INTO Recipes VALUES ('lalalalalalalallala 2',1,2)
 INSERT INTO Recipes VALUES ('lalalalalalalallala 3',1,2)
 INSERT INTO Recipes VALUES ('lalalalalalalallala 4',1,3)
 INSERT INTO Recipes VALUES ('lalalalalalalallala 5',1,1)
-INSERT INTO Restaurants VALUES ('another rest 1',2,1,2)
-INSERT INTO Restaurants VALUES ('another rest 2',2,2,1)
-INSERT INTO Restaurants VALUES ('another rest 3',2,3,1)
-INSERT INTO Restaurants VALUES ('another rest 4',2,4,1)
-INSERT INTO Restaurants VALUES ('another rest 5',2,1,3)
+INSERT INTO Restaurants VALUES ('another rest 1','name1',2,1,2)
+INSERT INTO Restaurants VALUES ('another rest 2','name2',2,2,1)
+INSERT INTO Restaurants VALUES ('another rest 3','name3',2,3,1)
+INSERT INTO Restaurants VALUES ('another rest 4','name4',2,4,1)
+INSERT INTO Restaurants VALUES ('another rest 5','name5',2,1,3)
 
 SELECT * FROM Recipes
 SELECT * FROM Statuses
 SELECT * FROM Restaurants
 SELECT * FROM TypeFood
+SELECT * FROM Users
 
 
 --EF Code
