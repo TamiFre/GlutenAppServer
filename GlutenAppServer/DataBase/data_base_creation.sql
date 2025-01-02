@@ -70,6 +70,8 @@ FOREIGN KEY (RestID) REFERENCES Restaurants(RestID) --Foreign key - the said res
 CREATE TABLE Recipes(
 RecipeID INT PRIMARY KEY IDENTITY,  --Primary key
 RecipeText NVARCHAR (1000),         -- The actual recipe
+TypeFoodID INT,
+FOREIGN KEY (TypeFoodID) REFERENCES TypeFood(TypeFoodID),
 UserID INT,
 FOREIGN KEY (UserID) REFERENCES Users(UserID), --Foreign key - the writer
 StatusID INT,                                      --Foreign key - status
@@ -116,15 +118,15 @@ INSERT INTO Statuses VALUES (1,'Approved')
 INSERT INTO Statuses VALUES (2,'Pending')
 INSERT INTO Statuses VALUES (3,'Declined')
 INSERT INTO Restaurants VALUES ('Ramon School','Ramon Rest', 2, 1,2)       --shahar's restaurant - restid =1, typefood = italian
-INSERT INTO Recipes VALUES ('lalalala', 1, 2)                  --gal's recipe
+INSERT INTO Recipes VALUES ('lalalala',2, 1, 2)                  --gal's recipe
 INSERT INTO Critics VALUES ('I love this restaurant', 1,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
 INSERT INTO Information VALUES ('Gluten is tasty - Shahar Shalgi')  --shahar's information - will be deleted
 --insert to restaurants and recipes pending
-INSERT INTO Recipes VALUES ('lalalalalalalallala 1',1,2)
-INSERT INTO Recipes VALUES ('lalalalalalalallala 2',1,2)
-INSERT INTO Recipes VALUES ('lalalalalalalallala 3',1,2)
-INSERT INTO Recipes VALUES ('lalalalalalalallala 4',1,3)
-INSERT INTO Recipes VALUES ('lalalalalalalallala 5',1,1)
+INSERT INTO Recipes VALUES ('lalalalalalalallala 1',3,1,2)
+INSERT INTO Recipes VALUES ('lalalalalalalallala 2',4,1,2)
+INSERT INTO Recipes VALUES ('lalalalalalalallala 3',1,1,2)
+INSERT INTO Recipes VALUES ('lalalalalalalallala 4',1,1,3)
+INSERT INTO Recipes VALUES ('lalalalalalalallala 5',2,1,1)
 INSERT INTO Restaurants VALUES ('another rest 1','name1',2,1,2)
 INSERT INTO Restaurants VALUES ('another rest 2','name2',2,2,1)
 INSERT INTO Restaurants VALUES ('another rest 3','name3',2,3,1)

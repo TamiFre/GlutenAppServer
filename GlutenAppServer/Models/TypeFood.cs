@@ -17,5 +17,8 @@ public partial class TypeFood
     public string? TypeFoodName { get; set; }
 
     [InverseProperty("TypeFood")]
+    public virtual ICollection<Recipe> Recipes { get; set; } = new List<Recipe>();
+
+    [InverseProperty("TypeFood")]
     public virtual ICollection<Restaurant> Restaurants { get; set; } = new List<Restaurant>();
 }

@@ -358,6 +358,22 @@ namespace GlutenAppServer.Controllers
         }
         #endregion
 
+        #region Get All Approved Recipes By Food Type
+        [HttpGet("GetApprovedRecipesByChosenFoodType")]
+        public IActionResult GetApprovedRecipesByChosenFoodType([FromQuery] int chosenFoodType)
+        {
+            try
+            {
+                List<Models.Recipe> listApprovedAndTypeRecipe = context.GettApprovedRecipesByChosenFoodType(chosenFoodType);
+                return Ok(listApprovedAndTypeRecipe);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
         //for some reason it wont save the data in the data base even tho it does change it
 
         #region Change status

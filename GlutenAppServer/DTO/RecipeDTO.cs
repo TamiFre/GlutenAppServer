@@ -6,13 +6,16 @@
         public int RecipeID { get; set; }
         public int? UserID { get; set; }
         public int StatusID { get; set; }
+        public int TypeFoodID { get; set; }
+
+
         //צריך בונה
         public RecipeDTO(Models.Recipe restUser)
         {
             this.StatusID = 2;//PENDING
             this.Recipe = restUser.RecipeText;
             this.UserID = restUser.UserId;
-            
+            this.TypeFoodID = restUser.TypeFoodId;
             //recipe id adds auto
         }
 

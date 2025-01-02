@@ -15,6 +15,9 @@ public partial class Recipe
     [StringLength(1000)]
     public string? RecipeText { get; set; }
 
+    [Column("TypeFoodID")]
+    public int TypeFoodId { get; set; }
+
     [Column("UserID")]
     public int? UserId { get; set; }
 
@@ -24,6 +27,10 @@ public partial class Recipe
     [ForeignKey("StatusId")]
     [InverseProperty("Recipes")]
     public virtual Status? Status { get; set; }
+
+    [ForeignKey("TypeFoodId")]
+    [InverseProperty("Recipes")]
+    public virtual TypeFood? TypeFood { get; set; }
 
     [ForeignKey("UserId")]
     [InverseProperty("Recipes")]
