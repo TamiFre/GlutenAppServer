@@ -51,6 +51,12 @@ namespace GlutenAppServer.Models
         {
             return this.Recipes.Where(r => r.StatusId == 1 && r.TypeFoodId == chosenFoodType).ToList();
         }
+        //get all the facts in information
+
+        public List<Information>? GetAllFacts()
+        {
+            return this.Information.ToList();
+        }
 
 
         //get critics for a restaurant

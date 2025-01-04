@@ -25,7 +25,7 @@ namespace GlutenAppServer.Controllers
 
         //FIRST ETERATION
 
-        #region register regular
+        #region Register regular
         //למשתמש רגיל בלי מנהל מסעדה
         [HttpPost("RegisterRegular")]
         public IActionResult RegisterRegular([FromBody] DTO.UsersDTO userDTO)
@@ -93,7 +93,7 @@ namespace GlutenAppServer.Controllers
         }
         #endregion
 
-        #region admin 
+        #region Admin 
         //Add Fact to database - admin
         [HttpPost("AddFact")]
         public IActionResult AddFact([FromBody] DTO.InformationDTO informationDTO)
@@ -160,7 +160,7 @@ namespace GlutenAppServer.Controllers
         //REGISTER MANAGER
         //
 
-        #region register manager restaurant
+        #region Register manager restaurant
         //Check
         [HttpPost("RegisterManager")]
         public IActionResult RegisterManager([FromBody] DTO.ManagerDTO managerDTO)
@@ -374,8 +374,23 @@ namespace GlutenAppServer.Controllers
         }
         #endregion
 
-        //for some reason it wont save the data in the data base even tho it does change it
+        #region Get All Fun Facts
+        [HttpGet("GetAllFacts")]
+        public IActionResult GetAllFacts()
+        {
+            try
+            {
+                List<Models.Information> listAllFunFacts = context.GetAllFacts();
+                return Ok(listAllFunFacts);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
 
+        //for some reason it wont save the data in the data base even tho it does change it
         #region Change status
         //change the status of the restaurant
         [HttpPost("ChangeRestStatusToApprove")]

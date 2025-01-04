@@ -121,6 +121,7 @@ INSERT INTO Restaurants VALUES ('Ramon School','Ramon Rest', 2, 1,2)       --sha
 INSERT INTO Recipes VALUES ('lalalala',2, 1, 2)                  --gal's recipe
 INSERT INTO Critics VALUES ('I love this restaurant', 1,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
 INSERT INTO Information VALUES ('Gluten is tasty - Shahar Shalgi')  --shahar's information - will be deleted
+INSERT INTO Information VALUES ('Gluten is yuck - Shahar Shalgi')  --shahar's information - will be deleted
 --insert to restaurants and recipes pending
 INSERT INTO Recipes VALUES ('lalalalalalalallala 1',3,1,2)
 INSERT INTO Recipes VALUES ('lalalalalalalallala 2',4,1,2)
