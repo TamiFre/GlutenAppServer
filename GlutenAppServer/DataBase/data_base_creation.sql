@@ -132,10 +132,13 @@ INSERT INTO Restaurants VALUES ('another rest 1','name1',2,1,2)
 INSERT INTO Restaurants VALUES ('another rest 2','name2',2,2,1)
 INSERT INTO Restaurants VALUES ('another rest 3','name3',2,3,1)
 INSERT INTO Restaurants VALUES ('another rest 4','name4',2,4,1)
-INSERT INTO Restaurants VALUES ('another rest 5','name5',2,1,3)
+INSERT INTO Restaurants VALUES ('another rest 5','name5',2,1,2)
+INSERT INTO Restaurants VALUES ('another rest 6','name5',2,1,2)
+INSERT INTO Restaurants VALUES ('another rest 6','name5',2,1,2)
 
 SELECT * FROM Recipes
 SELECT * FROM Statuses
+SELECT * FROM TypeFood
 SELECT * FROM Restaurants
 SELECT * FROM TypeFood
 SELECT * FROM Users

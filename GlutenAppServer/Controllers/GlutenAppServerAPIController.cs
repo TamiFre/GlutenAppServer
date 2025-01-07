@@ -390,7 +390,6 @@ namespace GlutenAppServer.Controllers
         }
         #endregion
 
-        //for some reason it wont save the data in the data base even tho it does change it
         #region Change status
         //change the status of the restaurant
         [HttpPost("ChangeRestStatusToApprove")]
@@ -406,22 +405,72 @@ namespace GlutenAppServer.Controllers
                 if (u == null || u.TypeId != 2)
                     return Unauthorized();
 
-                Models.Restaurant newRest = new Restaurant()
-                {
-                    RestAddress = restaurantDTO.RestAddress,
-                    UserId = restaurantDTO.UserID,
-                    TypeFoodId = restaurantDTO.TypeFoodID,
-                    StatusId = restaurantDTO.StatusID,
-                    RestId = restaurantDTO.RestID
-                };
-
-                context.SetStatusRestToApproved(newRest);
-                context.SaveChanges();
-                return Ok(newRest);
+                bool success = context.SetStatusRest(restaurantDTO.RestID, 1);
+                if (success)
+                    return Ok();
+                else
+                    return BadRequest("Either resturantID not found or DB connection problem!");
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("ChangeRestStatusToDecline")]
+        public IActionResult ChangeRestStatusToDecline(DTO.RestaurantDTO restaurantDTO)
+        {
+            try
+            {
+                //validate its an admin
+                string? username = HttpContext.Session.GetString("loggedInUser");
+                if (username == null)
+                    return Unauthorized();
+                User? u = context.GetUser(username);
+                if (u == null || u.TypeId != 2)
+                    return Unauthorized();
+
+                bool success = context.SetStatusRest(restaurantDTO.RestID, 3);
+                if (success)
+                    return Ok();
+                else
+                    return BadRequest("Either resturantID not found or DB connection problem!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Get All Statuses
+        [HttpGet("GetAllStatuses")]
+        public IActionResult GetAllStatuses()
+        {
+            try
+            {
+                List<Models.Status> listStatusesWithString = context.GetAllStatuses();
+                return Ok(listStatusesWithString);
+            }
+            catch (Exception ex)
+            { 
+                return BadRequest("Problem with the connection to DB");
+            }
+        }
+        #endregion
+
+        #region Get All FoodTypes
+        [HttpGet("GetAllFoodTypes")]
+        public IActionResult GetAllFoodTypes()
+        {
+            try
+            {
+                List<Models.TypeFood> list = context.GetAllFoodType();
+                return Ok(list);
+            }
+            catch (Exception ex) 
+            {
+                return BadRequest("Problem with the connection to DB");
             }
         }
         #endregion

@@ -67,15 +67,40 @@ namespace GlutenAppServer.Models
             return critics;
         }
 
-        //not working
-        public void SetStatusRestToApproved(Restaurant restaurant)
+        //set restaurant status - true if worked false otherwise
+        public bool SetStatusRest(int restId, int statusId)
         {
-            var okay = this.Restaurants.Where(r => r.RestAddress == restaurant.RestAddress).FirstOrDefault();
-            if (okay != null)
+            try
             {
-                // Update the StatusID property of the found restaurant
-                restaurant.StatusId = 1;
+                Restaurant? r = this.Restaurants.Where(r => r.RestId == restId).FirstOrDefault();
+                if (r != null)
+                {
+                    r.StatusId = statusId;
+                    this.Update(r);
+                    this.SaveChanges();
+                    return true;
+                }
+                return false;
             }
+            catch(Exception e)
+            {
+                return false;
+            }
+            
+        }
+        //get all statuses to list
+        public List<Status>? GetAllStatuses()
+        {
+            List<Status>? list = new List<Status>();
+            list = this.Statuses.ToList();
+            return list;
+        }
+        //get all food types to list 
+        public List<TypeFood>? GetAllFoodType()
+        {
+            List<TypeFood>? list = new List<TypeFood>();
+            list = this.TypeFoods.ToList();
+            return list;    
         }
     }
 }
