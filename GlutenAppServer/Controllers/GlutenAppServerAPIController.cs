@@ -2,6 +2,7 @@
 using GlutenAppServer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace GlutenAppServer.Controllers
@@ -34,6 +35,11 @@ namespace GlutenAppServer.Controllers
             {
                 //לעשות לוג אאוט לקודמים
                 HttpContext.Session.Clear();
+                //check if uername exists
+                if (context.GetUser(userDTO.Name) != null)
+                {
+                    return BadRequest("User Already Exists");
+                }
 
                 //יצירת יוזר חדש
                 Models.User newUser = new User()
@@ -169,7 +175,10 @@ namespace GlutenAppServer.Controllers
             {
                 //לעשות לוג אאוט לקודמים
                 HttpContext.Session.Clear();
-
+                if (context.GetUser(managerDTO.UserManager.Name) != null)
+                {
+                    return BadRequest("User Already Exists");
+                }
                 //יצירת יוזר חדש
                 Models.User user = new User()
                 {
@@ -178,7 +187,10 @@ namespace GlutenAppServer.Controllers
                     TypeId = managerDTO.UserManager.TypeID,
                     UserId = 0
                 };
-
+                if (context.IsRestExists(managerDTO.RestaurantManager.RestName))
+                {
+                    return BadRequest("Restaurant Already Exists");
+                }
                 //יצירת מסעדה חדשה
                 Models.Restaurant restaurant = new Restaurant()
                 {
@@ -390,7 +402,7 @@ namespace GlutenAppServer.Controllers
         }
         #endregion
 
-        #region Change status
+        #region Change Status - Restaurants
         //change the status of the restaurant
         [HttpPost("ChangeRestStatusToApprove")]
         public IActionResult ChangeRestStatusToApprove(DTO.RestaurantDTO restaurantDTO)
@@ -442,6 +454,97 @@ namespace GlutenAppServer.Controllers
             }
         }
         #endregion
+
+        #region Change Status - Recipes
+        [HttpPost("ChangeRecipeStatusToApprove")]
+        public IActionResult ChangeRecipeStatusToApprove(DTO.RecipeDTO recipeDTO)
+        {
+            try
+            {
+                //validate its an admin
+                string? username = HttpContext.Session.GetString("loggedInUser");
+                if (username == null)
+                    return Unauthorized();
+                User? u = context.GetUser(username);
+                if (u == null || u.TypeId != 2)
+                    return Unauthorized();
+
+                bool success = context.SetRecipeStatus(recipeDTO.RecipeID,1);
+                if (success)
+                    return Ok();
+                else
+                    return BadRequest("Either recipeID not found or DB connection problem!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("ChangeRecipeStatusToDecline")]
+        public IActionResult ChangeRecipeStatusToDecline(DTO.RecipeDTO recipeDTO)
+        {
+            try
+            {
+                //validate its an admin
+                string? username = HttpContext.Session.GetString("loggedInUser");
+                if (username == null)
+                    return Unauthorized();
+                User? u = context.GetUser(username);
+                if (u == null || u.TypeId != 2)
+                    return Unauthorized();
+
+                bool success = context.SetRecipeStatus(recipeDTO.RecipeID, 3);
+                if (success)
+                    return Ok();
+                else
+                    return BadRequest("Either recipeID not found or DB connection problem!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Update Profile
+        [HttpPost("UpdateProfile")]
+        public async Task<IActionResult> UpdateProfile([FromBody] DTO.UsersDTO userDto)
+        {
+            if (userDto == null)
+            {
+                return BadRequest("User data is null");
+            }
+
+            // חיפוש המשתמש לפי Id
+            var user = await context.Users.FindAsync(userDto.UserID);
+
+            if (user == null)
+            {
+                return NotFound($"User with ID {userDto.UserID} not found");
+            }
+
+            // עדכון השדות של המשתמש
+            user.UserName = userDto.Name;
+            user.UserPass = userDto.Password;
+
+            try
+            {
+                // שמירת השינויים למסד הנתונים
+                await context.SaveChangesAsync();
+                return Ok(new { message = "Profile updated successfully" });
+            }
+            catch (Exception ex)
+            {
+                // טיפול בשגיאות
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred", error = ex.Message });
+            }
+
+        }
+
+        #endregion
+
+        //ASK OFER
 
         #region Get All Statuses
         [HttpGet("GetAllStatuses")]

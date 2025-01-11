@@ -11,6 +11,13 @@ namespace GlutenAppServer.Models
         {
             return this.Users.Where(u => u.UserName == userName).FirstOrDefault();
         }
+        //check if restaurant exists - true if it does
+        public bool IsRestExists(string restName)
+        {
+            if (this.Restaurants.Where(r => r.RestName == restName).FirstOrDefault() == null)
+                return false;
+            return true;
+        }
         //get rest by status
         public List<Restaurant>? GetAllRestByStatus(int i)
         {
@@ -88,6 +95,28 @@ namespace GlutenAppServer.Models
             }
             
         }
+
+        //set recipe status - true if worked false otherwise
+        public bool SetRecipeStatus(int recipeID, int statusID)
+        {
+            try
+            {
+                Recipe? r = this.Recipes.Where(r => r.RecipeId == recipeID).FirstOrDefault();
+                if (r != null)
+                {
+                    r.StatusId = statusID;
+                    this.Update(r);
+                    this.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         //get all statuses to list
         public List<Status>? GetAllStatuses()
         {
