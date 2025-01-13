@@ -147,7 +147,7 @@ namespace GlutenAppServer.Controllers
                 Models.Recipe newRcipe = new Recipe()
                 {
                     //id = identity
-                    RecipeText = recipeDTO.Recipe,
+                    RecipeText = recipeDTO.RecipeText,
                     UserId = recipeDTO.UserID,
                     StatusId = 2
                 };
@@ -419,7 +419,7 @@ namespace GlutenAppServer.Controllers
 
                 bool success = context.SetStatusRest(restaurantDTO.RestID, 1);
                 if (success)
-                    return Ok();
+                    return Ok(success);
                 else
                     return BadRequest("Either resturantID not found or DB connection problem!");
             }
@@ -444,7 +444,7 @@ namespace GlutenAppServer.Controllers
 
                 bool success = context.SetStatusRest(restaurantDTO.RestID, 3);
                 if (success)
-                    return Ok();
+                    return Ok(success);
                 else
                     return BadRequest("Either resturantID not found or DB connection problem!");
             }
@@ -471,7 +471,7 @@ namespace GlutenAppServer.Controllers
 
                 bool success = context.SetRecipeStatus(recipeDTO.RecipeID,1);
                 if (success)
-                    return Ok();
+                    return Ok(success);
                 else
                     return BadRequest("Either recipeID not found or DB connection problem!");
             }
@@ -496,7 +496,7 @@ namespace GlutenAppServer.Controllers
 
                 bool success = context.SetRecipeStatus(recipeDTO.RecipeID, 3);
                 if (success)
-                    return Ok();
+                    return Ok(success);
                 else
                     return BadRequest("Either recipeID not found or DB connection problem!");
             }
@@ -543,8 +543,6 @@ namespace GlutenAppServer.Controllers
         }
 
         #endregion
-
-        //ASK OFER
 
         #region Get All Statuses
         [HttpGet("GetAllStatuses")]

@@ -36,6 +36,7 @@ CREATE TABLE Users(
 UserID INT PRIMARY KEY IDENTITY,         --Primary key
 UserName NVARCHAR (20),                  --The Username
 UserPass NVARCHAR (20),                  --Password
+UserEmail NVARCHAR (50),
 TypeID INT,
 FOREIGN KEY (TypeID) REFERENCES TypeUserId(TypeID)  --Foreign key to show user types
 );
