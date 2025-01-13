@@ -86,7 +86,7 @@ namespace GlutenAppServer.Controllers
                 }
 
                 //Login suceed! now mark login in session memory!
-                HttpContext.Session.SetString("loggedInUser", modelsUser.UserName);
+                HttpContext.Session.SetString("loggedInUser", modelsUser.UserEmail);
 
                 DTO.UsersDTO dtoUser = new DTO.UsersDTO(modelsUser);
 
