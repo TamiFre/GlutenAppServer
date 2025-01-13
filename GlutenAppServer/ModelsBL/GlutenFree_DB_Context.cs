@@ -7,9 +7,9 @@ namespace GlutenAppServer.Models
     public partial class GlutenFree_DB_Context: DbContext
     {
         //get user
-        public User? GetUser(string userName)
+        public User? GetUser(string userEmail)
         {
-            return this.Users.Where(u => u.UserName == userName).FirstOrDefault();
+            return this.Users.Where(u => u.UserEmail == userEmail).FirstOrDefault();
         }
         //check if restaurant exists - true if it does
         public bool IsRestExists(string restName)

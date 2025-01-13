@@ -15,7 +15,7 @@
             this.StatusID = 2;//PENDING
             this.RecipeText = restUser.RecipeText;
             this.UserID = restUser.UserId;
-            this.TypeFoodID = restUser.TypeFoodId;
+            this.TypeFoodID = (int)restUser.TypeFoodId;
             //recipe id adds auto
         }
 

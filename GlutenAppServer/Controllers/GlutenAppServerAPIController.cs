@@ -46,7 +46,8 @@ namespace GlutenAppServer.Controllers
                 {
                     UserName = userDTO.Name,
                     UserPass = userDTO.Password,
-                    TypeId = userDTO.TypeID
+                    TypeId = userDTO.TypeID,
+                    UserEmail = userDTO.UserEmail
                 };
 
                 //הוספת היוזר
@@ -76,7 +77,7 @@ namespace GlutenAppServer.Controllers
                 HttpContext.Session.Clear(); //Logout any previous login attempt
 
                 //Get model user class from DB with matching user name
-                Models.User? modelsUser = context.GetUser(loginDto.Name);
+                Models.User? modelsUser = context.GetUser(loginDto.UserEmail);
 
                 //Check if user exist for this password match, if not return Access Denied (Error 403) 
                 if (modelsUser == null || modelsUser.UserPass != loginDto.Password)
@@ -185,6 +186,7 @@ namespace GlutenAppServer.Controllers
                     UserName = managerDTO.UserManager.Name,
                     UserPass = managerDTO.UserManager.Password,
                     TypeId = managerDTO.UserManager.TypeID,
+                    UserEmail = managerDTO.UserManager.UserEmail,
                     UserId = 0
                 };
                 if (context.IsRestExists(managerDTO.RestaurantManager.RestName))

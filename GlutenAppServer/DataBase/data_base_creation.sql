@@ -112,9 +112,9 @@ INSERT INTO TypeFood VALUES ('BBQ')
 INSERT INTO TypeFood VALUES ('French')
 
 --הכנסת דמה לכל הטבלאות
-INSERT INTO Users VALUES ('Gal', 'GalTheBest123', 1)        --gal the first user. userid = 1, typeid = 1
-INSERT INTO Users VALUES ('Shahar', 'ShaharTheBest123', 3)  --shahar the first restaurant manager. userid = 2, typeid = 3
-INSERT INTO Users VALUES ('Tami', 'TamiFre123', 2)          --tami the admin
+INSERT INTO Users VALUES ('Gal', 'GalTheBest123','Gal@gmail.com', 1)        --gal the first user. userid = 1, typeid = 1
+INSERT INTO Users VALUES ('Shahar', 'ShaharTheBest123','Shahar@gmail.com', 3)  --shahar the first restaurant manager. userid = 2, typeid = 3
+INSERT INTO Users VALUES ('Tami', 'TamiFre123','Tami@gmail.com', 2)          --tami the admin
 INSERT INTO Statuses VALUES (1,'Approved')
 INSERT INTO Statuses VALUES (2,'Pending')
 INSERT INTO Statuses VALUES (3,'Declined')

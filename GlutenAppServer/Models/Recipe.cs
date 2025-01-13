@@ -16,7 +16,7 @@ public partial class Recipe
     public string? RecipeText { get; set; }
 
     [Column("TypeFoodID")]
-    public int TypeFoodId { get; set; }
+    public int? TypeFoodId { get; set; }
 
     [Column("UserID")]
     public int? UserId { get; set; }

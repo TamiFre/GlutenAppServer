@@ -18,6 +18,9 @@ public partial class User
     [StringLength(20)]
     public string? UserPass { get; set; }
 
+    [StringLength(50)]
+    public string? UserEmail { get; set; }
+
     [Column("TypeID")]
     public int? TypeId { get; set; }
 
