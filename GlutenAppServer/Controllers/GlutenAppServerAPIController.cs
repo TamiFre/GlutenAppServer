@@ -546,6 +546,39 @@ namespace GlutenAppServer.Controllers
 
         #endregion
 
+        #region Update Restaurant
+        [HttpPost("UpdateRestauratnt")]
+        public async Task<IActionResult> UpdateRestaurant([FromBody] DTO.RestaurantDTO restaurantDTO)
+        {
+            if (restaurantDTO == null)
+            {
+                return BadRequest("Restaurant is null");
+            }
+            //search the restaurant with the matching id
+            var restaurant = await context.Restaurants.FindAsync(restaurantDTO.RestID);
+            if (restaurant == null)
+            {
+                return NotFound("Rstaurant doesnt exist in DB");
+            }
+            //update the fields
+            restaurant.RestName = restaurantDTO.RestName;
+            restaurant.RestAddress = restaurantDTO.RestAddress;
+            restaurant.UserId = restaurantDTO.UserID;
+            restaurant.TypeFoodId = restaurantDTO.TypeFoodID;
+            restaurant.StatusId = 2;
+            //save the data to DB
+            try
+            {
+                await context.SaveChangesAsync();
+                return Ok("Restaurant updated");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "An error occurred", error = ex.Message });
+            }
+        }
+        #endregion
+
         #region Get All Statuses
         [HttpGet("GetAllStatuses")]
         public IActionResult GetAllStatuses()
