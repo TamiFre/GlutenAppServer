@@ -131,5 +131,10 @@ namespace GlutenAppServer.Models
             list = this.TypeFoods.ToList();
             return list;    
         }
+
+        public List<Restaurant?> GetRestaurantByUser(int userID)
+        {
+            return this.Restaurants.Where(r => r.UserId == userID).ToList();
+        }
     }
 }

@@ -2,6 +2,7 @@
 using GlutenAppServer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -142,7 +143,7 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
-               //add user validation
+                //add user validation
 
                 //יצירת מתכון חדש
                 Models.Recipe newRcipe = new Recipe()
@@ -283,7 +284,7 @@ namespace GlutenAppServer.Controllers
                 if (u == null || u.TypeId != 2)
                     return Unauthorized();
 
-                List <Models.Recipe> listRecipe = context.GetAllRecipeByStatus(statusID);
+                List<Models.Recipe> listRecipe = context.GetAllRecipeByStatus(statusID);
                 return Ok(listRecipe);
             }
             catch (Exception ex)
@@ -314,7 +315,7 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
-                List<Models.Recipe> listApprovedRecipe = context.GetAllApprovedRecipes();    
+                List<Models.Recipe> listApprovedRecipe = context.GetAllApprovedRecipes();
                 return Ok(listApprovedRecipe);
             }
             catch (Exception ex)
@@ -471,7 +472,7 @@ namespace GlutenAppServer.Controllers
                 if (u == null || u.TypeId != 2)
                     return Unauthorized();
 
-                bool success = context.SetRecipeStatus(recipeDTO.RecipeID,1);
+                bool success = context.SetRecipeStatus(recipeDTO.RecipeID, 1);
                 if (success)
                     return Ok(success);
                 else
@@ -589,7 +590,7 @@ namespace GlutenAppServer.Controllers
                 return Ok(listStatusesWithString);
             }
             catch (Exception ex)
-            { 
+            {
                 return BadRequest("Problem with the connection to DB");
             }
         }
@@ -604,11 +605,30 @@ namespace GlutenAppServer.Controllers
                 List<Models.TypeFood> list = context.GetAllFoodType();
                 return Ok(list);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return BadRequest("Problem with the connection to DB");
             }
         }
+        #endregion
+
+        #region Get All Restaurants Of A User
+        [HttpGet("GetAllUserRestaurants")]
+        public async Task<IActionResult> GetAllUserRestaurants([FromQuery] int userID)
+        {
+            try
+            {
+                if (userID == 0)
+                    return BadRequest("No User");
+                List<Restaurant> list = this.context.GetRestaurantByUser(userID);
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
         #endregion
     }
 }
