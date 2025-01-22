@@ -137,11 +137,12 @@ INSERT INTO Restaurants VALUES ('another rest 5','name5',2,1,2)
 INSERT INTO Restaurants VALUES ('another rest 6','name5',2,1,2)
 INSERT INTO Restaurants VALUES ('another rest 6','name5',2,1,2)
 
-SELECT * FROM Recipes
+
 SELECT * FROM Statuses
 SELECT * FROM TypeFood
 
 SELECT * FROM TypeFood
+SELECT * FROM Recipes
 SELECT * FROM Users
 SELECT * FROM Restaurants
 
