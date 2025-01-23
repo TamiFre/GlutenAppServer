@@ -8,6 +8,7 @@
         public string RestAddress { get; set; }
         public string RestName {  get; set; }
         public int StatusID { get; set; }
+        public string ProfileImagePath { get; set; } = "";
         //צריך בונה
 
         public RestaurantDTO(Models.Restaurant restUser)

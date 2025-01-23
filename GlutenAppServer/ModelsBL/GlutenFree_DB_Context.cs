@@ -17,7 +17,12 @@ namespace GlutenAppServer.Models
             User u = GetUser(userEmail);
             return this.Recipes.Where(r=>r.RecipeId==recipeID&&r.UserId==u.UserId).FirstOrDefault();
         }
-
+        //get restaurant
+        public Restaurant? GetRestaurant(int restaurantID, string userEmail)
+        {
+            User u = GetUser(userEmail);
+            return this.Restaurants.Where(r => r.RestId == restaurantID && r.UserId == u.UserId).FirstOrDefault();
+        }
 
         //check if restaurant exists - true if it does
 
