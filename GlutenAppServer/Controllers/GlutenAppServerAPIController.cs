@@ -149,6 +149,7 @@ namespace GlutenAppServer.Controllers
                 Models.Recipe newRcipe = new Recipe()
                 {
                     //id = identity
+                   
                     RecipeText = recipeDTO.RecipeText,
                     UserId = recipeDTO.UserID,
                     StatusId = 2,
