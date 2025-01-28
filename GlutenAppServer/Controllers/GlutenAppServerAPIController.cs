@@ -576,13 +576,15 @@ namespace GlutenAppServer.Controllers
         }
         #endregion
 
+
+
         #region Get All Critics Of A Restaurant
-        [HttpPost("GetCriticForRestaurant")]
-        public IActionResult GetCriticForRestaurant([FromBody] RestaurantDTO restaurantDTO)
+        [HttpGet("GetCriticForRestaurant")]
+        public IActionResult GetCriticForRestaurant([FromQuery] int restaurantID)
         {
             try
             {
-                List<Models.Critic> listCritics = context.GetCriticsByRestaurant(restaurantDTO);
+                List<Models.Critic> listCritics = context.GetCriticsByRestaurant(restaurantID);
                 return Ok(listCritics);
             }
             catch (Exception ex)
@@ -591,6 +593,8 @@ namespace GlutenAppServer.Controllers
             }
         }
         #endregion
+
+
 
         #region Get All Approved Recipes By Food Type
         [HttpGet("GetApprovedRecipesByChosenFoodType")]

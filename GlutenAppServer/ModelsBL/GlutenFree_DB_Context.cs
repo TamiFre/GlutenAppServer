@@ -82,10 +82,10 @@ namespace GlutenAppServer.Models
 
 
         //get critics for a restaurant
-        public List<Critic>? GetCriticsByRestaurant(RestaurantDTO restaurantDTO)
+        public List<Critic>? GetCriticsByRestaurant(int id)
         {
             List<Critic>? critics = new List<Critic>();
-            critics = this.Critics.Where(c => c.RestId == restaurantDTO.RestID).ToList();
+            critics = this.Critics.Where(c => c.RestId == id).ToList();
             return critics;
         }
 

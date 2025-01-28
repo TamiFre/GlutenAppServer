@@ -121,6 +121,9 @@ INSERT INTO Statuses VALUES (3,'Declined')
 INSERT INTO Restaurants VALUES ('Ramon School','Ramon Rest', 2, 1,2)       --shahar's restaurant - restid =1, typefood = italian
 INSERT INTO Recipes VALUES ('lalalala',2, 1, 2)                  --gal's recipe
 INSERT INTO Critics VALUES ('I love this restaurant', 1,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
+INSERT INTO Critics VALUES ('I love this restaurant', 2,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
+INSERT INTO Critics VALUES ('I love this restaurant', 1,2)
+INSERT INTO Critics VALUES ('I love this restaurant', 1,3)
 INSERT INTO Information VALUES ('Gluten is tasty - Shahar Shalgi')  --shahar's information - will be deleted
 INSERT INTO Information VALUES ('Gluten is yuck - Shahar Shalgi')  --shahar's information - will be deleted
 --insert to restaurants and recipes pending
@@ -140,7 +143,7 @@ INSERT INTO Restaurants VALUES ('another rest 6','name5',2,1,2)
 
 SELECT * FROM Statuses
 SELECT * FROM TypeFood
-
+SELECT * FROM Critics
 SELECT * FROM TypeFood
 SELECT * FROM Recipes
 SELECT * FROM Users
