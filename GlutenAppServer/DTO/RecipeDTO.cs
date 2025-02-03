@@ -3,6 +3,7 @@
     public class RecipeDTO
     {
         public string RecipeText { get; set; } = null;
+        public string RecipeHeadLine { get; set; } = null;
         public int RecipeID { get; set; }
         public int? UserID { get; set; }
         public int StatusID { get; set; }
@@ -17,6 +18,7 @@
             this.UserID = restUser.UserId;
             this.TypeFoodID = (int)restUser.TypeFoodId;
             this.RecipeID = restUser.RecipeId;
+            this.RecipeHeadLine = restUser.RecipeHeadLine;
             //recipe id adds auto
         }
 

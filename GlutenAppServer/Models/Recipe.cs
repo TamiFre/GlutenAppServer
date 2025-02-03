@@ -15,6 +15,9 @@ public partial class Recipe
     [StringLength(1000)]
     public string? RecipeText { get; set; }
 
+    [StringLength(100)]
+    public string? RecipeHeadLine { get; set; }
+
     [Column("TypeFoodID")]
     public int? TypeFoodId { get; set; }
 
