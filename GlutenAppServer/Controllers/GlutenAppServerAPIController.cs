@@ -153,7 +153,8 @@ namespace GlutenAppServer.Controllers
                     RecipeText = recipeDTO.RecipeText,
                     UserId = recipeDTO.UserID,
                     StatusId = 2,
-                    TypeFoodId = recipeDTO.TypeFoodID
+                    TypeFoodId = recipeDTO.TypeFoodID,
+                    RecipeHeadLine = recipeDTO.RecipeHeadLine
                 };
                 context.Recipes.Add(newRcipe);
                 context.SaveChanges();
@@ -462,7 +463,17 @@ namespace GlutenAppServer.Controllers
                 if (u == null || u.TypeId != 2)
                     return Unauthorized();
                 List<Models.Restaurant> listRestaurant = context.GetAllRestByStatus(statusID);
-                return Ok(listRestaurant);
+                List<DTO.RestaurantDTO> final = new List<RestaurantDTO>();
+                foreach (Restaurant r in listRestaurant)
+                {
+                    final.Add
+                        (new RestaurantDTO(r)
+                        {
+                            ProfileImagePath = GetRestaurantImageVirtualPath(r.RestId)
+                        }
+                        );
+                }
+                return Ok(final);
             }
             catch (Exception ex)
             {
@@ -478,7 +489,18 @@ namespace GlutenAppServer.Controllers
             try
             {
                 List<Models.Restaurant> listRestaurants = context.GetAllRestaurants();
-                return Ok(listRestaurants);
+                List<DTO.RestaurantDTO> final = new List<RestaurantDTO>();
+                foreach (Restaurant r in listRestaurants)
+                {
+                    final.Add
+                        (new RestaurantDTO(r)
+                        {
+                            ProfileImagePath = GetRestaurantImageVirtualPath(r.RestId)
+                        }
+                        );
+                }
+
+                return Ok(final);
             }
             catch (Exception ex)
             {
@@ -504,7 +526,17 @@ namespace GlutenAppServer.Controllers
                     return Unauthorized();
 
                 List<Models.Recipe> listRecipe = context.GetAllRecipeByStatus(statusID);
-                return Ok(listRecipe);
+                List<DTO.RecipeDTO> final = new List<RecipeDTO>();
+                foreach (Recipe r in listRecipe)
+                {
+                    final.Add
+                        (new RecipeDTO(r)
+                        {
+                            ProfileImagePath = GetRecipeImageVirtualPath(r.RecipeId)
+                        }
+                        );
+                }
+                return Ok(final);
             }
             catch (Exception ex)
             {
@@ -519,7 +551,19 @@ namespace GlutenAppServer.Controllers
             try
             {
                 List<Models.Recipe> listRecipe = context.GetAllRecipes();
-                return Ok(listRecipe);
+                List<DTO.RecipeDTO> final = new List<RecipeDTO>();
+                foreach (Recipe r in listRecipe)
+                {
+                    final.Add
+                        (new RecipeDTO(r)
+                        {
+                            ProfileImagePath = GetRecipeImageVirtualPath(r.RecipeId)
+                        }
+                        );
+                }
+
+                return Ok(final);
+                
             }
             catch (Exception ex)
             {

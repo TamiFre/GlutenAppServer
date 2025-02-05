@@ -24,5 +24,20 @@
 
         public RestaurantDTO() { }
 
+        //public Models.Restaurant GetModels()
+        //{
+        //    Models.Restaurant modelsUser = new Models.Restaurant()
+        //    {
+        //        StatusId = this.StatusID,
+        //        RestId=this.RestID,
+        //        RestAddress=this.RestAddress,
+        //        UserId = this.UserID, 
+        //        TypeFoodId = this.TypeFoodID,
+        //        RestName=this.RestName
+
+        //    };
+
+        //    return modelsUser;
+        //}
     }
 }
