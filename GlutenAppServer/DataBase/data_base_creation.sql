@@ -125,6 +125,13 @@ INSERT INTO Critics VALUES ('I love this restaurant', 1,1)  --gal's critic - abo
 INSERT INTO Critics VALUES ('I love this restaurant', 2,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
 INSERT INTO Critics VALUES ('I love this restaurant', 1,2)
 INSERT INTO Critics VALUES ('I love this restaurant', 1,3)
+INSERT INTO Critics VALUES ('I love this restaurant', 3,1)
+INSERT INTO Critics VALUES ('I love this restaurant', 3,1)
+INSERT INTO Critics VALUES ('I love this restaurant', 3,1)
+INSERT INTO Critics VALUES ('I love this restaurant', 2,3)
+INSERT INTO Critics VALUES ('I love this restaurant', 2,4)
+INSERT INTO Critics VALUES ('I love this restaurant', 2,3)
+
 INSERT INTO Information VALUES ('Gluten is tasty - Shahar Shalgi')  --shahar's information - will be deleted
 INSERT INTO Information VALUES ('Gluten is yuck - Shahar Shalgi')  --shahar's information - will be deleted
 --insert to restaurants and recipes pending
@@ -141,7 +148,7 @@ INSERT INTO Restaurants VALUES ('another rest 5','name5',2,1,2)
 INSERT INTO Restaurants VALUES ('another rest 6','name5',2,1,2)
 INSERT INTO Restaurants VALUES ('another rest 6','name5',2,1,2)
 
-
+SELECT * FROM Information
 SELECT * FROM Statuses
 SELECT * FROM TypeFood
 SELECT * FROM Critics
