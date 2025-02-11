@@ -13,7 +13,8 @@
 
         public RestaurantDTO(Models.Restaurant restUser)
         {
-            this.StatusID = 2;//PENDING
+            
+            this.StatusID = 2;
             this.RestID = restUser.RestId;
             this.RestAddress = restUser.RestAddress;
             this.UserID = restUser.UserId;
@@ -23,21 +24,16 @@
         }
 
         public RestaurantDTO() { }
+        public RestaurantDTO(Models.Restaurant restUser, int statusID)
+        {
+            this.StatusID = statusID;
+            this.RestID = restUser.RestId;
+            this.RestAddress = restUser.RestAddress;
+            this.UserID = restUser.UserId;
+            this.TypeFoodID = restUser.TypeFoodId;
+            this.RestName = restUser.RestName;
+            //rest id adds auto
+        }
 
-        //public Models.Restaurant GetModels()
-        //{
-        //    Models.Restaurant modelsUser = new Models.Restaurant()
-        //    {
-        //        StatusId = this.StatusID,
-        //        RestId=this.RestID,
-        //        RestAddress=this.RestAddress,
-        //        UserId = this.UserID, 
-        //        TypeFoodId = this.TypeFoodID,
-        //        RestName=this.RestName
-
-        //    };
-
-        //    return modelsUser;
-        //}
     }
 }

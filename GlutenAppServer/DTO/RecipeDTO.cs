@@ -13,7 +13,20 @@
         //צריך בונה
         public RecipeDTO(Models.Recipe restUser)
         {
-            this.StatusID = 2;//PENDING
+
+            this.StatusID = 2;//pending
+            this.RecipeText = restUser.RecipeText;
+            this.UserID = restUser.UserId;
+            this.TypeFoodID = (int)restUser.TypeFoodId;
+            this.RecipeID = restUser.RecipeId;
+            this.RecipeHeadLine = restUser.RecipeHeadLine;
+            //recipe id adds auto
+        }
+        // another builder that gets a status id and a model in order to transfer the list
+        public RecipeDTO(Models.Recipe restUser, int statusID)
+        {
+
+            this.StatusID = statusID;//this status
             this.RecipeText = restUser.RecipeText;
             this.UserID = restUser.UserId;
             this.TypeFoodID = (int)restUser.TypeFoodId;

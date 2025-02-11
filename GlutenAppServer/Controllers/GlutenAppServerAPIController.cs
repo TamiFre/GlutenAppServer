@@ -467,7 +467,7 @@ namespace GlutenAppServer.Controllers
                 foreach (Restaurant r in listRestaurant)
                 {
                     final.Add
-                        (new RestaurantDTO(r)
+                        (new RestaurantDTO(r, statusID)
                         {
                             ProfileImagePath = GetRestaurantImageVirtualPath(r.RestId)
                         }
@@ -493,7 +493,7 @@ namespace GlutenAppServer.Controllers
                 foreach (Restaurant r in listRestaurants)
                 {
                     final.Add
-                        (new RestaurantDTO(r)
+                        (new RestaurantDTO(r,(int)r.StatusId)
                         {
                             ProfileImagePath = GetRestaurantImageVirtualPath(r.RestId)
                         }
@@ -530,7 +530,7 @@ namespace GlutenAppServer.Controllers
                 foreach (Recipe r in listRecipe)
                 {
                     final.Add
-                        (new RecipeDTO(r)
+                        (new RecipeDTO(r, statusID)
                         {
                             ProfileImagePath = GetRecipeImageVirtualPath(r.RecipeId)
                         }
@@ -555,7 +555,7 @@ namespace GlutenAppServer.Controllers
                 foreach (Recipe r in listRecipe)
                 {
                     final.Add
-                        (new RecipeDTO(r)
+                        (new RecipeDTO(r,(int)r.StatusId)
                         {
                             ProfileImagePath = GetRecipeImageVirtualPath(r.RecipeId)
                         }
