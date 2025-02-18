@@ -168,6 +168,7 @@ namespace GlutenAppServer.Controllers
         #endregion
 
 
+
         #region Is Image
         //this function gets a file stream and check if it is an image
         private static bool IsImage(Stream stream)
@@ -387,6 +388,100 @@ namespace GlutenAppServer.Controllers
         }
         #endregion
 
+        #region Image Critic
+        [HttpPost("UploadCriticImage")]
+        public async Task<IActionResult> UploadCriticImage(IFormFile file, [FromQuery] int criticID)
+        {
+            //Check if who is logged in
+            string? userEmail = HttpContext.Session.GetString("loggedInUser");
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                return Unauthorized("User is not logged in");
+            }
+
+            //Get model restaurant class from DB with matching email. 
+            Models.Critic critic = context.GetCritic(criticID);
+            //Clear the tracking of all objects to avoid double tracking
+            context.ChangeTracker.Clear();
+
+            if (critic == null)
+            {
+                return Unauthorized("User is not found in the database");
+            }
+
+
+            //Read all files sent
+            long imagesSize = 0;
+
+            if (file.Length > 0)
+            {
+                //Check the file extention!
+                string[] allowedExtentions = { ".png", ".jpg" };
+                string extention = "";
+                if (file.FileName.LastIndexOf(".") > 0)
+                {
+                    extention = file.FileName.Substring(file.FileName.LastIndexOf(".")).ToLower();
+                }
+                if (!allowedExtentions.Where(e => e == extention).Any())
+                {
+                    //Extention is not supported
+                    return BadRequest("File sent with non supported extention");
+                }
+
+                //Build path in the web root (better to a specific folder under the web root
+                string filePath = $"{this.webHostEnvironment.WebRootPath}\\criticimages\\{critic.CriticId}{extention}";
+
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    await file.CopyToAsync(stream);
+
+                    if (IsImage(stream))
+                    {
+                        imagesSize += stream.Length;
+                    }
+                    else
+                    {
+                        //Delete the file if it is not supported!
+                        System.IO.File.Delete(filePath);
+                    }
+
+                }
+
+            }
+            DTO.CriticDTO criticDTO = new DTO.CriticDTO(critic);
+            criticDTO.ProfileImagePath = GetCriticImageVirtualPath(criticDTO.CriticID);
+
+            return Ok(criticDTO);
+        }
+
+        //this function check which profile image exist and return the virtual path of it.
+        //if it does not exist it returns the default profile image virtual path
+        private string GetCriticImageVirtualPath(int criticID)
+        {
+            string virtualPath = $"/criticimages/{criticID}";
+            string path = $"{this.webHostEnvironment.WebRootPath}\\criticimages\\{criticID}.png";
+            if (System.IO.File.Exists(path))
+            {
+                virtualPath += ".png";
+            }
+            else
+            {
+                path = $"{this.webHostEnvironment.WebRootPath}\\criticimages\\{criticID}.jpg";
+                if (System.IO.File.Exists(path))
+                {
+                    virtualPath += ".jpg";
+                }
+                else
+                {
+                    virtualPath = $"/criticimages/default.png";
+                }
+            }
+
+            return virtualPath;
+        }
+        #endregion
+
+
 
         #region Register manager restaurant
         //Check
@@ -579,7 +674,17 @@ namespace GlutenAppServer.Controllers
             try
             {
                 List<Models.Recipe> listApprovedRecipe = context.GetAllApprovedRecipes();
-                return Ok(listApprovedRecipe);
+                List<DTO.RecipeDTO> final = new List<RecipeDTO>();
+                foreach (Recipe r in listApprovedRecipe)
+                {
+                    final.Add
+                        (new RecipeDTO(r)
+                        {
+                            ProfileImagePath = GetRecipeImageVirtualPath(r.RecipeId)
+                        }
+                        );
+                }
+                return Ok(final);
             }
             catch (Exception ex)
             {
@@ -595,7 +700,17 @@ namespace GlutenAppServer.Controllers
             try
             {
                 List<Models.Restaurant> listApprovedRestaurant = context.GetAllApprovedRastaurants();
-                return Ok(listApprovedRestaurant);
+                List<DTO.RestaurantDTO> final = new List<RestaurantDTO>();
+                foreach (Restaurant r in listApprovedRestaurant)
+                {
+                    final.Add
+                        (new RestaurantDTO(r)
+                        {
+                            ProfileImagePath = GetRestaurantImageVirtualPath(r.RestId)
+                        }
+                        );
+                }
+                return Ok(final);
             }
             catch (Exception ex)
             {
@@ -611,7 +726,17 @@ namespace GlutenAppServer.Controllers
             try
             {
                 List<Models.Restaurant> listApprovedAndTypeFood = context.GetApprovedRestaurantsByChosenFoodType(chosenFoodType);
-                return Ok(listApprovedAndTypeFood);
+                List<DTO.RestaurantDTO> final = new List<RestaurantDTO>();
+                foreach (Restaurant r in listApprovedAndTypeFood)
+                {
+                    final.Add
+                        (new RestaurantDTO(r)
+                        {
+                            ProfileImagePath = GetRestaurantImageVirtualPath(r.RestId)
+                        }
+                        );
+                }
+                return Ok(final);
             }
             catch (Exception ex)
             {
@@ -647,7 +772,17 @@ namespace GlutenAppServer.Controllers
             try
             {
                 List<Models.Recipe> listApprovedAndTypeRecipe = context.GettApprovedRecipesByChosenFoodType(chosenFoodType);
-                return Ok(listApprovedAndTypeRecipe);
+                List<DTO.RecipeDTO> final = new List<RecipeDTO>();
+                foreach (Recipe r in listApprovedAndTypeRecipe)
+                {
+                    final.Add
+                        (new RecipeDTO(r)
+                        {
+                            ProfileImagePath = GetRecipeImageVirtualPath(r.RecipeId)
+                        }
+                        );
+                }
+                return Ok(final);
             }
             catch (Exception ex)
             {
@@ -904,7 +1039,6 @@ namespace GlutenAppServer.Controllers
         {
             try 
             {
-            //validate restaurant manager
             Models.Restaurant restaurant = new Restaurant()
             {
                 RestAddress = restaurantDTO.RestAddress,
@@ -924,6 +1058,31 @@ namespace GlutenAppServer.Controllers
                 return BadRequest();
             }
 
+        }
+        #endregion
+
+        #region Add Critic
+        [HttpPost("AddCritic")]
+        public IActionResult AddCritic([FromBody] DTO.CriticDTO criticDTO)
+        {
+            try
+            {
+                Models.Critic critic = new Critic()
+                {
+                    CriticId = criticDTO.CriticID,
+                    UserId = criticDTO.UserID,
+                    CriticText = criticDTO.CriticText,
+                    RestId = criticDTO.RestID
+                };
+                context.Critics.Add(critic);
+                context.SaveChanges();
+                DTO.CriticDTO c = new DTO.CriticDTO(critic);
+                return Ok(critic);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
         #endregion
     }

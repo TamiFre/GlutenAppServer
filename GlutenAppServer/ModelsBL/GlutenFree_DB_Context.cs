@@ -11,6 +11,12 @@ namespace GlutenAppServer.Models
         {
             return this.Users.Where(u => u.UserEmail == userEmail).FirstOrDefault();
         }
+        //get critic
+        public Critic? GetCritic(int criticID)
+        {
+            return this.Critics.Where(c=> c.CriticId==criticID).FirstOrDefault();
+        }
+
         // get recipe
         public Recipe? GetRecipe(int recipeID, string userEmail)
         {
