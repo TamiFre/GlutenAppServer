@@ -8,6 +8,7 @@ namespace GlutenAppServer.DTO
         public string CriticText { get; set; } = null;
         public int? UserID { get; set; }    
         public int? RestID { get; set; }
+        public int Rate { get; set; }
         public string ProfileImagePath { get; set; } = "";
         public CriticDTO() { }
 
@@ -17,6 +18,7 @@ namespace GlutenAppServer.DTO
             this.CriticID = modelCritic.CriticId;
             this.UserID = modelCritic.UserId;
             this.RestID = modelCritic.RestId;
+            this.Rate = (int)modelCritic.Rate;
 
         }
     }

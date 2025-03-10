@@ -122,6 +122,13 @@ INSERT INTO Statuses VALUES (1,'Approved')
 INSERT INTO Statuses VALUES (2,'Pending')
 INSERT INTO Statuses VALUES (3,'Declined')
 INSERT INTO Restaurants VALUES ('Ramon School','Ramon Rest',0, 2, 1,2)       --shahar's restaurant - restid =1, typefood = italian
+INSERT INTO Restaurants VALUES ('another rest 1','name1',0,2,1,2)
+INSERT INTO Restaurants VALUES ('another rest 2','name2',0,2,2,1)
+INSERT INTO Restaurants VALUES ('another rest 3','name3',1,2,3,1)
+INSERT INTO Restaurants VALUES ('another rest 4','name4',1,2,4,1)
+INSERT INTO Restaurants VALUES ('another rest 5','name5',1,2,1,2)
+INSERT INTO Restaurants VALUES ('another rest 6','name5',0,2,1,2)
+INSERT INTO Restaurants VALUES ('another rest 6','name5',0,2,1,2)
 INSERT INTO Recipes VALUES ('lalalala','headLine',2, 1, 2)                  --gal's recipe
 INSERT INTO Critics VALUES ('I love this restaurant',4, 1,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
 INSERT INTO Critics VALUES ('I love this restaurant',4, 2,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
@@ -142,13 +149,7 @@ INSERT INTO Recipes VALUES ('lalalalalalalallala 2','HeadLine 2',4,1,2)
 INSERT INTO Recipes VALUES ('lalalalalalalallala 3','HeadLine 3',1,1,2)
 INSERT INTO Recipes VALUES ('lalalalalalalallala 4','HeadLine 4',1,1,3)
 INSERT INTO Recipes VALUES ('lalalalalalalallala 5','HeadLine 5',2,1,1)
-INSERT INTO Restaurants VALUES ('another rest 1','name1',0,2,1,2)
-INSERT INTO Restaurants VALUES ('another rest 2','name2',0,2,2,1)
-INSERT INTO Restaurants VALUES ('another rest 3','name3',1,2,3,1)
-INSERT INTO Restaurants VALUES ('another rest 4','name4',1,2,4,1)
-INSERT INTO Restaurants VALUES ('another rest 5','name5',1,2,1,2)
-INSERT INTO Restaurants VALUES ('another rest 6','name5',0,2,1,2)
-INSERT INTO Restaurants VALUES ('another rest 6','name5',0,2,1,2)
+
 
 SELECT * FROM Information
 SELECT * FROM Statuses

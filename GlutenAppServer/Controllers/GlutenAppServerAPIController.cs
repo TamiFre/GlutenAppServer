@@ -517,6 +517,7 @@ namespace GlutenAppServer.Controllers
                     TypeFoodId = managerDTO.RestaurantManager.TypeFoodID,
                     RestName = managerDTO.RestaurantManager.RestName,
                     StatusId = 2,
+                    IsSterile = managerDTO.RestaurantManager.IsSterile,
                 };
 
                 //הוספת היוזר

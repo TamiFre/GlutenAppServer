@@ -15,6 +15,8 @@ public partial class Critic
     [StringLength(1000)]
     public string? CriticText { get; set; }
 
+    public int? Rate { get; set; }
+
     [Column("UserID")]
     public int? UserId { get; set; }
 

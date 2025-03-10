@@ -8,6 +8,7 @@
         public string RestAddress { get; set; }
         public string RestName {  get; set; }
         public int StatusID { get; set; }
+        public int IsSterile { get; set; }
         public string ProfileImagePath { get; set; } = "";
         //צריך בונה
 
@@ -20,6 +21,7 @@
             this.UserID = restUser.UserId;
             this.TypeFoodID = restUser.TypeFoodId;
             this.RestName = restUser.RestName;
+            this.IsSterile = (int)restUser.IsSterile;
             //rest id adds auto
         }
 
@@ -32,6 +34,7 @@
             this.UserID = restUser.UserId;
             this.TypeFoodID = restUser.TypeFoodId;
             this.RestName = restUser.RestName;
+            this.IsSterile =(int) restUser.IsSterile;
             //rest id adds auto
         }
 

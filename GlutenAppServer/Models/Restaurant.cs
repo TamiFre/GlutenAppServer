@@ -18,6 +18,8 @@ public partial class Restaurant
     [StringLength(70)]
     public string? RestName { get; set; }
 
+    public int? IsSterile { get; set; }
+
     [Column("UserID")]
     public int? UserId { get; set; }
 
