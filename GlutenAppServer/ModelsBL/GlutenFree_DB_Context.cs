@@ -1,6 +1,7 @@
 ﻿using GlutenAppServer.DTO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.IdentityModel.Tokens;
 
 namespace GlutenAppServer.Models
 {
@@ -15,6 +16,22 @@ namespace GlutenAppServer.Models
         public Critic? GetCritic(int criticID)
         {
             return this.Critics.Where(c=> c.CriticId==criticID).FirstOrDefault();
+        }
+        //get average stars per restaurant
+        public double GetAvgRestRate(int restID)
+        {
+            List<Critic> criticsForRest = this.Critics.Where(c => c.RestId == restID).ToList();
+            int numCritics = criticsForRest.Count;
+            int countRates = 0;
+            if (numCritics == 0)
+            {
+                return 0;
+            }
+            foreach (Critic c in criticsForRest)
+            {
+                countRates += (int)c.Rate;
+            }
+            return ((double)countRates / numCritics);
         }
 
         // get recipe
@@ -31,8 +48,6 @@ namespace GlutenAppServer.Models
         }
 
         //check if restaurant exists - true if it does
-
-
         public bool IsRestExists(string restName)
         {
             if (this.Restaurants.Where(r => r.RestName == restName).FirstOrDefault() == null)

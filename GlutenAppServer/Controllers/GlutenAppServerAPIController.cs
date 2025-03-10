@@ -764,6 +764,27 @@ namespace GlutenAppServer.Controllers
         }
         #endregion
 
+        #region Get Average Rate For A Restaurant
+        [HttpGet("GetAvgRatesForRest")]
+        public IActionResult GetAvgRatesForRest([FromQuery] int restID)
+        {
+            try
+            {
+                int numRest = context.GetAllRestaurants().Count;
+                if (restID > numRest)
+                {
+                    return BadRequest("this restaurant does not exist");
+                }
+
+                double avg = context.GetAvgRestRate(restID);
+                return Ok(avg);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest("Something Went Wrong With the Server");
+            }
+        }
+        #endregion
 
 
         #region Get All Approved Recipes By Food Type
