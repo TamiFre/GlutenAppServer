@@ -1094,12 +1094,13 @@ namespace GlutenAppServer.Controllers
                     CriticId = criticDTO.CriticID,
                     UserId = criticDTO.UserID,
                     CriticText = criticDTO.CriticText,
-                    RestId = criticDTO.RestID
+                    RestId = criticDTO.RestID,
+                    Rate = criticDTO.Rate
                 };
                 context.Critics.Add(critic);
                 context.SaveChanges();
                 DTO.CriticDTO c = new DTO.CriticDTO(critic);
-                return Ok(critic);
+                return Ok(c);
             }
             catch (Exception ex)
             {
