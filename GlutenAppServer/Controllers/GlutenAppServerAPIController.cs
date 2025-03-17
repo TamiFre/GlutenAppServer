@@ -990,6 +990,7 @@ namespace GlutenAppServer.Controllers
             restaurant.RestAddress = restaurantDTO.RestAddress;
             restaurant.UserId = restaurantDTO.UserID;
             restaurant.TypeFoodId = restaurantDTO.TypeFoodID;
+            restaurant.IsSterile = restaurantDTO.IsSterile;
             restaurant.StatusId = 2;
             //save the data to DB
             try
