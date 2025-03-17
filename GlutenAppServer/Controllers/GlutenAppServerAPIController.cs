@@ -1068,6 +1068,7 @@ namespace GlutenAppServer.Controllers
                 TypeFoodId = restaurantDTO.TypeFoodID,
                 RestName = restaurantDTO.RestName,
                 StatusId = 2,
+                IsSterile = restaurantDTO.IsSterile,
             };
             //add restaurant
                  context.Restaurants.Add(restaurant);
