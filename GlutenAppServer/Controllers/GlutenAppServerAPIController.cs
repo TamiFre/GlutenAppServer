@@ -755,7 +755,17 @@ namespace GlutenAppServer.Controllers
             try
             {
                 List<Models.Critic> listCritics = context.GetCriticsByRestaurant(restaurantID);
-                return Ok(listCritics);
+                List<DTO.CriticDTO> final = new List<CriticDTO>();
+                foreach (Critic c in listCritics)
+                {
+                    final.Add
+                        (new CriticDTO(c)
+                        {
+                            ProfileImagePath = GetRestaurantImageVirtualPath(c.CriticId)
+                        }
+                        );
+                }
+                return Ok(final);
             }
             catch (Exception ex)
             {

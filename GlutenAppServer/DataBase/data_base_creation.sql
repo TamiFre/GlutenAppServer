@@ -154,12 +154,12 @@ INSERT INTO Recipes VALUES ('lalalalalalalallala 5','HeadLine 5',2,1,1)
 SELECT * FROM Information
 SELECT * FROM Statuses
 SELECT * FROM TypeFood
-SELECT * FROM Critics
+
 SELECT * FROM TypeFood
 SELECT * FROM Recipes
 SELECT * FROM Users
 SELECT * FROM Restaurants
-
+SELECT * FROM Critics
 
 --EF Code
 /*
