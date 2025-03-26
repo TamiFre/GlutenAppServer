@@ -172,5 +172,12 @@ namespace GlutenAppServer.Models
         {
             return this.Restaurants.Where(r => r.UserId == userID).ToList();
         }
+
+        public void DeleteRestaurant(int restID)
+        {
+            this.Critics.Where(c => c.RestId == restID).ExecuteDelete();
+            this.Restaurants.Where(r=> r.RestId== restID).ExecuteDelete();
+            SaveChanges();
+        }
     }
 }

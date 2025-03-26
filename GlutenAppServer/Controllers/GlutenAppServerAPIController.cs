@@ -1055,8 +1055,20 @@ namespace GlutenAppServer.Controllers
             {
                 if (userID == 0)
                     return BadRequest("No User");
-                List<Restaurant> list = this.context.GetRestaurantByUser(userID);
-                return Ok(list);
+                List<Models.Restaurant> listRestaurant = context.GetRestaurantByUser(userID);
+                List<DTO.RestaurantDTO> final = new List<RestaurantDTO>();
+                foreach (Restaurant r in listRestaurant)
+                {
+                    final.Add
+                        (new RestaurantDTO(r)
+                        {
+                            ProfileImagePath = GetRestaurantImageVirtualPath(r.RestId)
+                        }
+                        );
+                }
+                return Ok(final);
+
+                
             }
             catch (Exception ex)
             {
@@ -1117,6 +1129,30 @@ namespace GlutenAppServer.Controllers
             catch (Exception ex)
             {
                 return BadRequest();
+            }
+        }
+        #endregion
+
+        #region Close Restaurant
+        [HttpPost("DeleteRestaurant")]
+        public IActionResult DeleteRestaurant([FromBody] DTO.RestaurantDTO restaurantDTO)
+        {
+            try
+            {
+                string? username = HttpContext.Session.GetString("loggedInUser");
+                if (username == null)
+                    return Unauthorized();
+                User? u = context.GetUser(username);
+                if (u == null || u.TypeId != 3)
+                    return Unauthorized();
+                if(restaurantDTO.RestID==0)
+                    return BadRequest();
+                context.DeleteRestaurant(restaurantDTO.RestID);
+                return Ok();
+            }
+            catch(Exception ex) 
+            {
+                return BadRequest(ex.Message);
             }
         }
         #endregion
