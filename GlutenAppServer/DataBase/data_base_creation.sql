@@ -44,7 +44,7 @@ FOREIGN KEY (TypeID) REFERENCES TypeUserId(TypeID)  --Foreign key to show user t
 --יצירת טבלת מסעדות
 CREATE TABLE Restaurants(
 RestID INT PRIMARY KEY IDENTITY,               --Primary Key
-RestAddress NVARCHAR (70),                     --Address
+RestAddress NVARCHAR (100),                     --Address
 RestName NVARCHAR(70),
 IsSterile INT,                                 --0 not sterile 1 sterile
 UserID INT,
@@ -121,34 +121,32 @@ INSERT INTO Users VALUES ('Tami', 'TamiFre123','Tami@gmail.com', 2)          --t
 INSERT INTO Statuses VALUES (1,'Approved')
 INSERT INTO Statuses VALUES (2,'Pending')
 INSERT INTO Statuses VALUES (3,'Declined')
-INSERT INTO Restaurants VALUES ('Ramon School','Ramon Rest',0, 2, 1,2)       --shahar's restaurant - restid =1, typefood = italian
-INSERT INTO Restaurants VALUES ('another rest 1','name1',0,2,1,2)
-INSERT INTO Restaurants VALUES ('another rest 2','name2',0,2,2,1)
-INSERT INTO Restaurants VALUES ('another rest 3','name3',1,2,3,1)
-INSERT INTO Restaurants VALUES ('another rest 4','name4',1,2,4,1)
-INSERT INTO Restaurants VALUES ('another rest 5','name5',1,2,1,2)
-INSERT INTO Restaurants VALUES ('another rest 6','name5',0,2,1,2)
-INSERT INTO Restaurants VALUES ('another rest 6','name5',0,2,1,2)
-INSERT INTO Recipes VALUES ('lalalala','headLine',2, 1, 2)                  --gal's recipe
-INSERT INTO Critics VALUES ('I love this restaurant',4, 1,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
-INSERT INTO Critics VALUES ('I love this restaurant',4, 2,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
-INSERT INTO Critics VALUES ('I love this restaurant',5, 1,2)
-INSERT INTO Critics VALUES ('I love this restaurant',3, 1,3)
-INSERT INTO Critics VALUES ('I love this restaurant',2, 3,1)
-INSERT INTO Critics VALUES ('I love this restaurant',5, 3,1)
-INSERT INTO Critics VALUES ('I love this restaurant',1, 3,1)
-INSERT INTO Critics VALUES ('I love this restaurant',4, 2,3)
-INSERT INTO Critics VALUES ('I love this restaurant',3, 2,4)
-INSERT INTO Critics VALUES ('I love this restaurant',2, 2,3)
+INSERT INTO Restaurants VALUES ('Weizmann Street 13, Kfar Saba, Israel','Abu Falafel ',0, 2, 1,2)       --shahar's restaurant - restid =1, typefood = italian
+INSERT INTO Restaurants VALUES ('Chaim Levanon Street 4, Tel Aviv-Yafo, Israel','Burgers',0,2,1,2)
+INSERT INTO Restaurants VALUES ('Ramatayim Road 5, Hod Hasharon, Israel','Steaks & Wine',0,2,2,1)
+INSERT INTO Restaurants VALUES ('Ramatayim Road 3, Hod Hasharon, Israel','Feel (Gluten)Free ',1,2,3,1)
+INSERT INTO Restaurants VALUES ('Levinski Street 3, Tel Aviv-Yafo, Israel','Shawarma',1,2,4,1)
+INSERT INTO Restaurants VALUES ('Levinski Street 10, Tel Aviv-Yafo, Israel','Gluten Free Euphoria',1,2,1,2)
+INSERT INTO Restaurants VALUES ('Dizengoff Street 3, Tel Aviv-Yafo, Israel','Heart Of Tel Aviv',0,2,1,3)
+INSERT INTO Recipes VALUES ('Take Two rice papers. Put egg on them. Fry them ontop of one other','Malawah',2, 1, 2)                  --gal's recipe
+INSERT INTO Critics VALUES ('Good food, good vibes and a fine dining experience',4, 1,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
+INSERT INTO Critics VALUES ('enjoyed the food, felt good afterwards meaning no traces of gluten',4, 2,1)  --gal's critic - about shahar's restaurant restid = 1, userid = 1 
+INSERT INTO Critics VALUES ('amazing gluten free food and staff',5, 1,2)
+INSERT INTO Critics VALUES ('average food, not sterile at all ',3, 1,3)
+INSERT INTO Critics VALUES ('almost no options for gluten free. a hair in the food',2, 3,1)
+INSERT INTO Critics VALUES ('good',5, 3,1)
+INSERT INTO Critics VALUES ('the worst gluten free options i have ever seen',1, 3,1)
+INSERT INTO Critics VALUES ('nice gluten free dishes',4, 2,3)
+INSERT INTO Critics VALUES ('average service and food',3, 2,4)
+INSERT INTO Critics VALUES ('i do not recommend going here',2, 2,3)
 
 INSERT INTO Information VALUES ('Gluten is tasty - Shahar Shalgi')  --shahar's information - will be deleted
 INSERT INTO Information VALUES ('Gluten is yuck - Shahar Shalgi')  --shahar's information - will be deleted
 --insert to restaurants and recipes pending
-INSERT INTO Recipes VALUES ('lalalalalalalallala 1','HeadLine 1',3,1,2)
-INSERT INTO Recipes VALUES ('lalalalalalalallala 2','HeadLine 2',4,1,2)
-INSERT INTO Recipes VALUES ('lalalalalalalallala 3','HeadLine 3',1,1,2)
-INSERT INTO Recipes VALUES ('lalalalalalalallala 4','HeadLine 4',1,1,3)
-INSERT INTO Recipes VALUES ('lalalalalalalallala 5','HeadLine 5',2,1,1)
+INSERT INTO Recipes VALUES ('Heat Up What you have in the bag for ten minutes','Burekas',3,1,2)
+INSERT INTO Recipes VALUES ('break an egg into a hot pan and wait till you hear sizzling','Omlet',4,1,2)
+INSERT INTO Recipes VALUES ('Heat up Water and insert an egg','Hard Boiled Egg',1,1,3)
+INSERT INTO Recipes VALUES ('Dont eat','Starve',2,1,1)
 
 
 SELECT * FROM Information
