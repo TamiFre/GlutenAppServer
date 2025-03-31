@@ -48,6 +48,7 @@ namespace GlutenAppServer
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                
             }
             #endregion
 

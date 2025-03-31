@@ -82,11 +82,7 @@ StatusID INT,                                      --Foreign key - status
 FOREIGN KEY (StatusID) REFERENCES Statuses(StatusID)
 );
 
---יצירת טבלת מידע
-CREATE TABLE Information(
-InfoID INT PRIMARY KEY IDENTITY,   --Primary key
-InfoText NVARCHAR (1000)           --The fun fact
-);
+
 
 --לוגין לאדמין 
 CREATE LOGIN [AppAdminLogin] WITH PASSWORD = 'Tami';
@@ -140,16 +136,13 @@ INSERT INTO Critics VALUES ('nice gluten free dishes',4, 2,3)
 INSERT INTO Critics VALUES ('average service and food',3, 2,4)
 INSERT INTO Critics VALUES ('i do not recommend going here',2, 2,3)
 
-INSERT INTO Information VALUES ('Gluten is tasty - Shahar Shalgi')  --shahar's information - will be deleted
-INSERT INTO Information VALUES ('Gluten is yuck - Shahar Shalgi')  --shahar's information - will be deleted
+
 --insert to restaurants and recipes pending
 INSERT INTO Recipes VALUES ('Heat Up What you have in the bag for ten minutes','Burekas',3,1,2)
 INSERT INTO Recipes VALUES ('break an egg into a hot pan and wait till you hear sizzling','Omlet',4,1,2)
 INSERT INTO Recipes VALUES ('Heat up Water and insert an egg','Hard Boiled Egg',1,1,3)
 INSERT INTO Recipes VALUES ('Dont eat','Starve',2,1,1)
 
-
-SELECT * FROM Information
 SELECT * FROM Statuses
 SELECT * FROM TypeFood
 

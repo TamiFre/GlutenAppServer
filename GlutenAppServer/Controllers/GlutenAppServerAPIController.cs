@@ -101,37 +101,7 @@ namespace GlutenAppServer.Controllers
         }
         #endregion
 
-        #region Admin 
-        //Add Fact to database - admin
-        [HttpPost("AddFact")]
-        public IActionResult AddFact([FromBody] DTO.InformationDTO informationDTO)
-        {
-            try
-            {
-                //validate its an admin
-                string? username = HttpContext.Session.GetString("loggedInUser");
-                if (username == null)
-                    return Unauthorized();
-                User? u = context.GetUser(username);
-                if (u == null || u.TypeId != 2)
-                    return Unauthorized();
-
-                //יצירת אינפו חדש
-                Models.Information newInfo = new Information()
-                {
-                    //the id will be identity
-                    InfoText = informationDTO.InfoText
-                };
-                context.Information.Add(newInfo);
-                context.SaveChanges();
-                return Ok(newInfo);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-        #endregion
+       
 
         #region Add Recipe
 
@@ -823,21 +793,7 @@ namespace GlutenAppServer.Controllers
         }
         #endregion
 
-        #region Get All Fun Facts
-        [HttpGet("GetAllFacts")]
-        public IActionResult GetAllFacts()
-        {
-            try
-            {
-                List<Models.Information> listAllFunFacts = context.GetAllFacts();
-                return Ok(listAllFunFacts);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-        #endregion
+        
 
         #region Change Status - Restaurants
         //change the status of the restaurant

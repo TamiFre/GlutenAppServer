@@ -12,7 +12,7 @@ public partial class Restaurant
     [Column("RestID")]
     public int RestId { get; set; }
 
-    [StringLength(70)]
+    [StringLength(100)]
     public string? RestAddress { get; set; }
 
     [StringLength(70)]
