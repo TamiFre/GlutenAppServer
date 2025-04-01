@@ -101,7 +101,7 @@ namespace GlutenAppServer.Controllers
         }
         #endregion
 
-       
+      
 
         #region Add Recipe
 
@@ -773,6 +773,7 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
+               
                 List<Models.Recipe> listApprovedAndTypeRecipe = context.GettApprovedRecipesByChosenFoodType(chosenFoodType);
                 List<DTO.RecipeDTO> final = new List<RecipeDTO>();
                 foreach (Recipe r in listApprovedAndTypeRecipe)
@@ -945,11 +946,18 @@ namespace GlutenAppServer.Controllers
             {
                 return BadRequest("Restaurant is null");
             }
+            //check if its a rest manager
+            string? username = HttpContext.Session.GetString("loggedInUser");
+            if (username == null)
+                return Unauthorized();
+            User? u = context.GetUser(username);
+            if (u == null || u.TypeId != 3)
+                return Unauthorized();
             //search the restaurant with the matching id
             var restaurant = await context.Restaurants.FindAsync(restaurantDTO.RestID);
             if (restaurant == null)
             {
-                return NotFound("Rstaurant doesnt exist in DB");
+                return NotFound("Restaurant doesnt exist in DB");
             }
             //update the fields
             restaurant.RestName = restaurantDTO.RestName;
@@ -1040,7 +1048,13 @@ namespace GlutenAppServer.Controllers
         {
             try 
             {
-            Models.Restaurant restaurant = new Restaurant()
+                string? username = HttpContext.Session.GetString("loggedInUser");
+                if (username == null)
+                    return Unauthorized();
+                User? u = context.GetUser(username);
+                if (u == null || u.TypeId != 3)
+                    return Unauthorized();
+                Models.Restaurant restaurant = new Restaurant()
             {
                 RestAddress = restaurantDTO.RestAddress,
                 UserId = restaurantDTO.UserID,
@@ -1069,6 +1083,12 @@ namespace GlutenAppServer.Controllers
         {
             try
             {
+                string? username = HttpContext.Session.GetString("loggedInUser");
+                if (username == null)
+                    return Unauthorized();
+                User? u = context.GetUser(username);
+                if (u == null || u.TypeId != 1)
+                    return Unauthorized();
                 Models.Critic critic = new Critic()
                 {
                     CriticId = criticDTO.CriticID,
