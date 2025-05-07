@@ -443,7 +443,7 @@ namespace GlutenAppServer.Controllers
                 }
                 else
                 {
-                    virtualPath = $"/criticimages/default.png";
+                    virtualPath = $"";
                 }
             }
 
@@ -731,7 +731,7 @@ namespace GlutenAppServer.Controllers
                     final.Add
                         (new CriticDTO(c)
                         {
-                            ProfileImagePath = GetRestaurantImageVirtualPath(c.CriticId)
+                            ProfileImagePath = GetCriticImageVirtualPath(c.CriticId)
                         }
                         );
                 }
@@ -1067,7 +1067,7 @@ namespace GlutenAppServer.Controllers
                  context.Restaurants.Add(restaurant);
                  context.SaveChanges();
                  DTO.RestaurantDTO r = new DTO.RestaurantDTO(restaurant);
-                 return Ok(restaurant);
+                 return Ok(r);
             }
             catch (Exception ex)
             {
@@ -1087,7 +1087,7 @@ namespace GlutenAppServer.Controllers
                 if (username == null)
                     return Unauthorized();
                 User? u = context.GetUser(username);
-                if (u == null || u.TypeId != 1)
+                if (u == null )
                     return Unauthorized();
                 Models.Critic critic = new Critic()
                 {
